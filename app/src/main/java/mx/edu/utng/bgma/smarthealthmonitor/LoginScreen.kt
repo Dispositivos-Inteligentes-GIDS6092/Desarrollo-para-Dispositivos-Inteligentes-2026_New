@@ -1,5 +1,6 @@
 package mx.edu.utng.bgma.smarthealthmonitor
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -10,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
@@ -107,6 +109,11 @@ fun LoginScreen(onLoginSuccess: () -> Unit = {}) {
 
                 Spacer(Modifier.height(24.dp))
 
+                val buttonScale by animateFloatAsState(
+                    targetValue = if (isLoading) 0.97f else 1f,
+                    label = "animacionEscalaBoton"
+                )
+
                 // TODO 6: Botón ENTRAR con estado loading
                 Button(
                     onClick = {
@@ -118,7 +125,8 @@ fun LoginScreen(onLoginSuccess: () -> Unit = {}) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp),
+                        .height(56.dp)
+                        .scale(buttonScale),
                     enabled = !isLoading
                 ) {
                     if (isLoading) {
