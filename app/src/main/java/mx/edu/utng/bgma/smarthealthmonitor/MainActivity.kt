@@ -10,22 +10,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import mx.edu.utng.bgma.smarthealthmonitor.ui.navegation.SmartHealthNavGraph
 import mx.edu.utng.bgma.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        setContent {
+//            SmartHealthMonitorTheme {
+//                Surface(modifier = Modifier.fillMaxSize()) {
+//                    LoginScreen(
+//                        onLoginSuccess = {
+//                            // TODO sesión 5: navegar al Dashboard
+//                            Log.d("SmartHealth", "Login exitoso")
+//                        }
+//                    )
+//                }
+//            }
+//        }
         setContent {
-            SmartHealthMonitorTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    LoginScreen(
-                        onLoginSuccess = {
-                            // TODO sesión 5: navegar al Dashboard
-                            Log.d("SmartHealth", "Login exitoso")
-                        }
-                    )
-                }
-            }
+            // NavGraph es ahora el punto de entrada — no LoginScreen directamente
+            SmartHealthNavGraph()
         }
     }
 }
@@ -58,12 +63,18 @@ fun ThemePreview() {
 }
 
 
-@Preview(name = "Login - Light", showBackground = true,
-    showSystemUi = true, device = "id:pixel_6")
-@Preview(name = "Login - Dark", showBackground = true,
-    uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
-@Preview(name = "Login - Big Font", showBackground = true,
-    fontScale = 1.5f)
+@Preview(
+    name = "Login - Light", showBackground = true,
+    showSystemUi = true, device = "id:pixel_6"
+)
+@Preview(
+    name = "Login - Dark", showBackground = true,
+    uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES
+)
+@Preview(
+    name = "Login - Big Font", showBackground = true,
+    fontScale = 1.5f
+)
 @Composable
 private fun LoginScreenPreview() {
     SmartHealthMonitorTheme {
