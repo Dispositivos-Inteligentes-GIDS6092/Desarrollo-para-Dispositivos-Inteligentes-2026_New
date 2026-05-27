@@ -20,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utng.bgma.smarthealthmonitor.LoginScreen
 import mx.edu.utng.bgma.smarthealthmonitor.ui.components.DashboardScreen
+import mx.edu.utng.bgma.smarthealthmonitor.ui.screens.HistorialScreen
 import mx.edu.utng.bgma.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
 
 @Composable
@@ -27,7 +28,7 @@ fun SmartHealthNavGraph() {
     val navController = rememberNavController()
 
     NavHost(
-        navController    = navController,
+        navController = navController,
         startDestination = Screen.Login.route
     ) {
         // ── Login ──────────────────────────────────────
@@ -54,11 +55,8 @@ fun SmartHealthNavGraph() {
             )
         }
         // ── Historial ──────────────────────────────────
-        composable(Screen.Historial.route) {
-            // TODO Ejercicio extra: HistorialScreen completo
-            // Por ahora: pantalla temporal con Back
-            PantallaEnConstruccion(
-                titulo = "Historial completo",
+        composable("historial") {
+            HistorialScreen(
                 onBack = { navController.popBackStack() }
             )
         }
@@ -84,16 +82,22 @@ fun PantallaEnConstruccion(titulo: String, onBack: () -> Unit) {
                     IconButton(onClick = onBack) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Regresar")
+                            contentDescription = "Regresar"
+                        )
                     }
                 }
             )
         }) { pad ->
             Box(
-                Modifier.fillMaxSize().padding(pad),
-                contentAlignment = Alignment.Center) {
-                Text("Próximamente: $titulo",
-                    style = MaterialTheme.typography.titleMedium)
+                Modifier
+                    .fillMaxSize()
+                    .padding(pad),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    "Próximamente: $titulo",
+                    style = MaterialTheme.typography.titleMedium
+                )
             }
         }
     }

@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import mx.edu.utng.bgma.smarthealthmonitor.data.models.LecturaFC
 
+
 // ui/components/FilaHistorial.kt
 @Composable
 fun FilaHistorial(
