@@ -7,25 +7,34 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState // Agregado
+import androidx.compose.runtime.getValue       // Agregado
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel // Agregado
+// Asegúrate de que el import de tu ViewModel sea correcto según tu estructura de carpetas
+// import mx.edu.utng.bgma.smarthealthmonitor.ui.viewmodels.DashboardViewModel
+
 import mx.edu.utng.bgma.smarthealthmonitor.data.models.LecturaFC
 import mx.edu.utng.bgma.smarthealthmonitor.data.models.MockData
 import mx.edu.utng.bgma.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
+import mx.edu.utng.bgma.smarthealthmonitor.ui.viewmodel.DashboardViewModel
 
-// ui/screens/DashboardScreen.kt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
     onHistorialClick: () -> Unit = {},
     onAlertClick: () -> Unit = {},
-    // TODO S6: Reemplazar con ViewModel que recibe datos del wearable
-    fc: Int = MockData.fcActual,
-    pasos: Int = MockData.pasosActual,
-    historial: List<LecturaFC> = MockData.historialFC
+    // PASO 5: Inyección del ViewModel
+    viewModel: DashboardViewModel = viewModel()
 ) {
+    // PASO 5: Conversión de StateFlow a State de Compose
+    val fc by viewModel.fc.collectAsState()
+    val pasos by viewModel.pasos.collectAsState()
+    val historial = viewModel.historial // Si es una lista fija o StateFlow también
+
     SmartHealthMonitorTheme {
         Scaffold(
             topBar = {
@@ -55,7 +64,6 @@ fun DashboardScreen(
                 }
             }
         ) { paddingValues ->
-            // ⚠️ paddingValues OBLIGATORIO
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -63,7 +71,7 @@ fun DashboardScreen(
                 contentPadding        = PaddingValues(16.dp),
                 verticalArrangement   = Arrangement.spacedBy(12.dp)
             ) {
-                // ── Tarjeta FC ────────────────────────────
+                // ── Tarjeta FC (Ahora usa el valor real del ViewModel) ──
                 item {
                     TarjetaDato(
                         valor      = "$fc",
@@ -73,7 +81,7 @@ fun DashboardScreen(
                         esNormal   = fc in 60..100
                     )
                 }
-                // ── Tarjeta Pasos ─────────────────────────
+                // ── Tarjeta Pasos (Ahora usa el valor real del ViewModel) ──
                 item {
                     TarjetaDato(
                         valor      = "%,d".format(pasos),
@@ -82,7 +90,7 @@ fun DashboardScreen(
                         colorValor = MaterialTheme.colorScheme.primary
                     )
                 }
-                // ── Encabezado historial ──────────────────
+
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -96,7 +104,7 @@ fun DashboardScreen(
                         }
                     }
                 }
-                // ── Lista del historial ───────────────────
+
                 items(historial, key = { it.id }) { lectura ->
                     FilaHistorial(lectura = lectura)
                 }
@@ -105,11 +113,10 @@ fun DashboardScreen(
     }
 }
 
-
+// Nota: Para que la Preview funcione, podrías necesitar pasar un ViewModel falso
+// o dejar los parámetros por defecto si el ViewModel tiene valores iniciales.
 @Preview(showBackground = true, name = "Dashboard - Light",
     showSystemUi = true, device = "id:pixel_6")
-@Preview(showBackground = true, name = "Dashboard - Dark",
-    uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun DashboardScreenPreview() {
     SmartHealthMonitorTheme {
