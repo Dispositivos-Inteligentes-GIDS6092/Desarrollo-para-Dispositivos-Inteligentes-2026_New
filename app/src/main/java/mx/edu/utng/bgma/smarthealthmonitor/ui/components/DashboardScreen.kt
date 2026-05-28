@@ -33,6 +33,7 @@ fun DashboardScreen(
     // PASO 5: Conversión de StateFlow a State de Compose
     val fc by viewModel.fc.collectAsState()
     val pasos by viewModel.pasos.collectAsState()
+    val spO2 by viewModel.spO2.collectAsState()
     val historial = viewModel.historial // Si es una lista fija o StateFlow también
 
     SmartHealthMonitorTheme {
@@ -88,6 +89,15 @@ fun DashboardScreen(
                         unidad     = "pasos",
                         label      = "Pasos del día",
                         colorValor = MaterialTheme.colorScheme.primary
+                    )
+                }
+                item {
+                    TarjetaDato(
+                        valor = "$spO2",
+                        unidad = "%",
+                        label = "Saturación de Oxígeno (SpO2)",
+                        colorValor = MaterialTheme.colorScheme.tertiary, // Color solicitado
+                        esNormal = spO2 >= 95 // Criterio médico básico
                     )
                 }
 

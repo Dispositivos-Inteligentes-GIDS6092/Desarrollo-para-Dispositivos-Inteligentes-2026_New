@@ -27,6 +27,12 @@ class DashboardViewModel : ViewModel() {
             started      = SharingStarted.WhileSubscribed(5_000),
             initialValue = MockData.pasosActual
         )
+
+    val spO2 = SmartHealthRepository.spO2Flow.map {
+        if (it == 0) 98 else it // Valor por defecto del 98% si es 0
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 98)
+
+
     val historial = MockData.historialFC  // TODO S7: Room
 }
 
