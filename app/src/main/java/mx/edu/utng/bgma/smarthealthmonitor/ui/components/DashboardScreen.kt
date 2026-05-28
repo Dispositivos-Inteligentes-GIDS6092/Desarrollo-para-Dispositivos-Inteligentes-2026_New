@@ -7,18 +7,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState // Agregado
-import androidx.compose.runtime.getValue       // Agregado
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel // Agregado
-// Asegúrate de que el import de tu ViewModel sea correcto según tu estructura de carpetas
-// import mx.edu.utng.bgma.smarthealthmonitor.ui.viewmodels.DashboardViewModel
-
-import mx.edu.utng.bgma.smarthealthmonitor.data.models.LecturaFC
-import mx.edu.utng.bgma.smarthealthmonitor.data.models.MockData
+import androidx.lifecycle.viewmodel.compose.viewModel
+// Import importante para el botón de simulación
+import mx.edu.utng.bgma.smarthealthmonitor.data.SmartHealthRepository
 import mx.edu.utng.bgma.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
 import mx.edu.utng.bgma.smarthealthmonitor.ui.viewmodel.DashboardViewModel
 
@@ -27,14 +24,22 @@ import mx.edu.utng.bgma.smarthealthmonitor.ui.viewmodel.DashboardViewModel
 fun DashboardScreen(
     onHistorialClick: () -> Unit = {},
     onAlertClick: () -> Unit = {},
-    // PASO 5: Inyección del ViewModel
-    viewModel: DashboardViewModel = viewModel()
+    viewModel: DashboardViewModel = viewModel(),
+    // Parámetros opcionales para facilitar la Preview
+    fcManual: Int? = null,
+    pasosManual: Int? = null,
+    spO2Manual: Int? = null
 ) {
-    // PASO 5: Conversión de StateFlow a State de Compose
-    val fc by viewModel.fc.collectAsState()
-    val pasos by viewModel.pasos.collectAsState()
-    val spO2 by viewModel.spO2.collectAsState()
-    val historial = viewModel.historial // Si es una lista fija o StateFlow también
+    // Observar estados del ViewModel
+    val fcState by viewModel.fc.collectAsState()
+    val pasosState by viewModel.pasos.collectAsState()
+    val spO2State by viewModel.spO2.collectAsState()
+    val historial = viewModel.historial
+
+    // Usar valor manual (si existe) o el del estado (reactivo)
+    val fc = fcManual ?: fcState
+    val pasos = pasosManual ?: pasosState
+    val spO2 = spO2Manual ?: spO2State
 
     SmartHealthMonitorTheme {
         Scaffold(
@@ -72,7 +77,7 @@ fun DashboardScreen(
                 contentPadding        = PaddingValues(16.dp),
                 verticalArrangement   = Arrangement.spacedBy(12.dp)
             ) {
-                // ── Tarjeta FC (Ahora usa el valor real del ViewModel) ──
+                // ── Tarjeta FC ──
                 item {
                     TarjetaDato(
                         valor      = "$fc",
@@ -82,7 +87,8 @@ fun DashboardScreen(
                         esNormal   = fc in 60..100
                     )
                 }
-                // ── Tarjeta Pasos (Ahora usa el valor real del ViewModel) ──
+
+                // ── Tarjeta Pasos ──
                 item {
                     TarjetaDato(
                         valor      = "%,d".format(pasos),
@@ -91,16 +97,19 @@ fun DashboardScreen(
                         colorValor = MaterialTheme.colorScheme.primary
                     )
                 }
+
+                // ── Tarjeta SpO2 ──
                 item {
                     TarjetaDato(
-                        valor = "$spO2",
-                        unidad = "%",
-                        label = "Saturación de Oxígeno (SpO2)",
-                        colorValor = MaterialTheme.colorScheme.tertiary, // Color solicitado
-                        esNormal = spO2 >= 95 // Criterio médico básico
+                        valor      = "$spO2",
+                        unidad     = "%",
+                        label      = "Saturación de Oxígeno",
+                        colorValor = MaterialTheme.colorScheme.tertiary,
+                        esNormal   = spO2 >= 95
                     )
                 }
 
+                // ── Encabezado Historial ──
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -115,21 +124,42 @@ fun DashboardScreen(
                     }
                 }
 
+                // ── Lista del historial ──
                 items(historial, key = { it.id }) { lectura ->
                     FilaHistorial(lectura = lectura)
+                }
+
+                // ── Botón de Simulación (Solo visible en modo Debug) ──
+                item {
+                    val isDebug = true
+                    if (isDebug) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        OutlinedButton(
+                            onClick = {
+                                // Simulación de datos variados
+                                SmartHealthRepository.actualizarFC((60..120).random())
+                                SmartHealthRepository.actualizarPasos((1000..9000).random())
+                                SmartHealthRepository.actualizarSpO2((90..100).random())
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Simular Wearable (Debug)")
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-// Nota: Para que la Preview funcione, podrías necesitar pasar un ViewModel falso
-// o dejar los parámetros por defecto si el ViewModel tiene valores iniciales.
-@Preview(showBackground = true, name = "Dashboard - Light",
+// Preview corregida para mostrar datos sin fallar por el ViewModel
+@Preview(showBackground = true, name = "Dashboard Completo",
     showSystemUi = true, device = "id:pixel_6")
 @Composable
 private fun DashboardScreenPreview() {
-    SmartHealthMonitorTheme {
-        DashboardScreen()
-    }
+    DashboardScreen(
+        fcManual = 75,
+        pasosManual = 4500,
+        spO2Manual = 98
+    )
 }

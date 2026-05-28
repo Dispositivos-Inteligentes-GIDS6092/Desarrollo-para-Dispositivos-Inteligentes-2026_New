@@ -28,7 +28,7 @@ class WearListenerService : WearableListenerService() {
                 val pasos = data.toIntOrNull() ?: return
                 SmartHealthRepository.actualizarPasos(pasos)
             }
-            // 2. Agregamos la lógica para procesar SpO2
+
             PATH_SPO2 -> {
                 val spo2 = data.toIntOrNull() ?: return
                 SmartHealthRepository.actualizarSpO2(spo2)
