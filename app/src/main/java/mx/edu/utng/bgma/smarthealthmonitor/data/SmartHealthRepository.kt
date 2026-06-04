@@ -56,9 +56,7 @@ object SmartHealthRepository {
     fun obtenerHistorial(): Flow<List<LecturaFC>> =
         dao?.obtenerUltimas() ?: emptyFlow()
 
-    suspend fun limpiarHistorialAntiguo() {
-        val sieteDiasEnMillis = 7 * 24 * 60 * 60 * 1000L
-        val limite = System.currentTimeMillis() - sieteDiasEnMillis
+    suspend fun limpiarHistorialAntiguo(limite: Long = System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000L)) {
         dao?.limpiarViejos(limite)
     }
 }
