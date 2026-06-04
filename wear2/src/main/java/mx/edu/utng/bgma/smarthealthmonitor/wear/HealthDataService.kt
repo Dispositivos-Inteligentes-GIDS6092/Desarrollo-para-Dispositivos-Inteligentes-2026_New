@@ -27,7 +27,6 @@ class HealthDataService : PassiveListenerService() {
 
     override fun onNewDataPointsReceived(dataPoints: DataPointContainer) {
         val fcDataPoints = dataPoints.getData(DataType.HEART_RATE_BPM)
-
         fcDataPoints.forEach { dataPoint ->
             if (dataPoint is SampleDataPoint<Double>) {
                 val bpm = dataPoint.value.toInt()
@@ -35,6 +34,21 @@ class HealthDataService : PassiveListenerService() {
                 scope.launch {
                     enviarFC(bpm)
                 }
+            }
+        }
+
+        val stepsDataPoints = dataPoints.getData(DataType.STEPS_DAILY)
+        stepsDataPoints.forEach { dataPoint ->
+            val value = dataPoint.value
+            val pasos = when (value) {
+                is Long -> value.toInt()
+                is Double -> value.toInt()
+                is Int -> value
+                else -> value.toString().toIntOrNull() ?: 0
+            }
+            Log.d(TAG, "Pasos recibidos: $pasos")
+            scope.launch {
+                enviarPasos(pasos)
             }
         }
     }
@@ -60,6 +74,27 @@ class HealthDataService : PassiveListenerService() {
         }
     }
 
+    private suspend fun enviarPasos(pasos: Int) {
+        try {
+            val data = pasos.toString().toByteArray()
+            val nodeClient = Wearable.getNodeClient(this)
+            val nodes = Tasks.await(nodeClient.connectedNodes)
+            for (node in nodes) {
+                messageClient.sendMessage(
+                    node.id,
+                    "/smarthealthmonitor/pasos",
+                    data
+                )
+                Log.d(TAG, "Pasos enviados al nodo ${node.displayName} (${node.id}): $pasos")
+            }
+            if (nodes.isEmpty()) {
+                Log.w(TAG, "No hay nodos conectados para enviar pasos.")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error enviando pasos: ${e.message}")
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         scope.cancel()
@@ -73,7 +108,10 @@ class HealthDataService : PassiveListenerService() {
                 val passiveClient = hsClient.passiveMonitoringClient
 
                 val config = PassiveListenerConfig.builder()
-                    .setDataTypes(setOf(DataType.HEART_RATE_BPM))
+                    .setDataTypes(setOf(
+                        DataType.HEART_RATE_BPM,
+                        DataType.STEPS_DAILY
+                    ))
                     .setShouldUserActivityInfoBeRequested(true)
                     .build()
 
