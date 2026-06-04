@@ -7,14 +7,12 @@ plugins {
 
 android {
     namespace = "mx.edu.utng.bgma.smarthealthmonitor"
-    compileSdk {
-        version = release(34)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "mx.edu.utng.bgma.smarthealthmonitor"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -60,7 +58,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.navigation:navigation-compose:2.8.0")
+    // Se eliminó la versión duplicada de navigation-compose que causaba conflicto
+    
     // Wearable Data Layer API
     implementation("com.google.android.gms:play-services-wearable:18.2.0")
     // Coroutines para await()
@@ -70,5 +69,4 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     // Necesario para generar el código del DAO
     ksp("androidx.room:room-compiler:$roomVersion")
-
 }
