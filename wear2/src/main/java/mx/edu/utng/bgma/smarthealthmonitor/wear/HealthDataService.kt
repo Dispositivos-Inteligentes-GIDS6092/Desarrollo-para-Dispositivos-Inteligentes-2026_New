@@ -27,27 +27,27 @@ class HealthDataService : PassiveListenerService() {
 
     override fun onNewDataPointsReceived(dataPoints: DataPointContainer) {
         val fcDataPoints = dataPoints.getData(DataType.HEART_RATE_BPM)
-        fcDataPoints.forEach { dataPoint ->
-            if (dataPoint is SampleDataPoint<Double>) {
-                val bpm = dataPoint.value.toInt()
-                Log.d(TAG, "FC recibida: $bpm BPM")
-                scope.launch {
-                    enviarFC(bpm)
-                }
+        val lastFC = fcDataPoints.lastOrNull()
+        if (lastFC is SampleDataPoint<Double>) {
+            val bpm = lastFC.value.toInt()
+            Log.d(TAG, "FC recibida (última del lote): $bpm BPM")
+            scope.launch {
+                enviarFC(bpm)
             }
         }
 
         val stepsDataPoints = dataPoints.getData(DataType.STEPS_DAILY)
         Log.d("MiAppDebug", "Contenido de pasos: $stepsDataPoints")
-        stepsDataPoints.forEach { dataPoint ->
-            val value = dataPoint.value
+        val lastSteps = stepsDataPoints.lastOrNull()
+        if (lastSteps != null) {
+            val value = lastSteps.value
             val pasos = when (value) {
                 is Long -> value.toInt()
                 is Double -> value.toInt()
                 is Int -> value
                 else -> value.toString().toIntOrNull() ?: 0
             }
-            Log.d(TAG, "Pasos recibidos: $pasos")
+            Log.d(TAG, "Pasos recibidos (últimos del lote): $pasos")
             scope.launch {
                 enviarPasos(pasos)
             }

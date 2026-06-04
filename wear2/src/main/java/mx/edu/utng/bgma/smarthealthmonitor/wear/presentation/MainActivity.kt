@@ -43,22 +43,22 @@ class MainActivity : ComponentActivity() {
 
         override fun onDataReceived(data: DataPointContainer) {
             val heartRateData = data.getData(DataType.HEART_RATE_BPM)
-            heartRateData.forEach { dataPoint ->
-                if (dataPoint is SampleDataPoint<Double>) {
-                    val bpm = dataPoint.value.toInt()
-                    Log.d("MainActivity", "FC del emulador recibida: $bpm BPM")
-                    currentHeartRate.value = bpm
-                    // Enviar la frecuencia cardíaca al teléfono automáticamente en tiempo real
-                    lifecycleScope.launch {
-                        HealthDataService.enviarFCDirectamente(applicationContext, bpm)
-                    }
+            val lastFC = heartRateData.lastOrNull()
+            if (lastFC is SampleDataPoint<Double>) {
+                val bpm = lastFC.value.toInt()
+                Log.d("MainActivity", "FC del emulador recibida: $bpm BPM")
+                currentHeartRate.value = bpm
+                // Enviar la frecuencia cardíaca al teléfono automáticamente en tiempo real
+                lifecycleScope.launch {
+                    HealthDataService.enviarFCDirectamente(applicationContext, bpm)
                 }
             }
 
             // Enviar los pasos al teléfono automáticamente si se reciben
             val stepsData = data.getData(DataType.STEPS_DAILY)
-            stepsData.forEach { dataPoint ->
-                val value = dataPoint.value
+            val lastSteps = stepsData.lastOrNull()
+            if (lastSteps != null) {
+                val value = lastSteps.value
                 val pasos = when (value) {
                     is Long -> value.toInt()
                     is Double -> value.toInt()
