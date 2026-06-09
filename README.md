@@ -5,6 +5,8 @@
 Aplicación Android de monitoreo de salud personal en tiempo real.
 Desarrollada como proyecto integrador — UTNG 9° Cuatrimestre 2025.
 
+
+
 ## Stack tecnológico
 | Tecnología | Uso |
 |---|---|
@@ -31,3 +33,4 @@ Desarrollada como proyecto integrador — UTNG 9° Cuatrimestre 2025.
 
 ## Autor
 Lizeth Ramírez — UTNG — Ing. en Desarrollo y Gestión de Software
+rmm.che@gmail.com
