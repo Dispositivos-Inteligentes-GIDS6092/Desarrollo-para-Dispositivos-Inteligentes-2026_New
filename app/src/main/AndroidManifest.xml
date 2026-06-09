@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="mx.edu.utng.bgma.smarthealthmonitor">
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        package="mx.edu.utng.bgma.smarthealthmonitor">
 
-    <application
-        android:name=".SmartHealthApp"
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.SmartHealthMonitor">
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
+        <application
+            android:name=".SmartHealthApp"
+            android:allowBackup="true"
+            android:dataExtractionRules="@xml/data_extraction_rules"
+            android:fullBackupContent="@xml/backup_rules"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
             android:theme="@style/Theme.SmartHealthMonitor">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
-        <!-- AndroidManifest.xml — dentro de <application> -->
-        <service
-            android:name=".data.WearListenerService"
-            android:exported="true">
-            <intent-filter>
-                <!-- Acción necesaria para recibir mensajes de Wear OS -->
-                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+            <activity
+                android:name=".MainActivity"
+                android:exported="true"
+                android:label="@string/app_name"
+                android:theme="@style/Theme.SmartHealthMonitor">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
 
-                <!-- Filtro para el path específico definido en el reloj -->
-                <data
-                    android:host="*"
-                    android:scheme="wear"
-                    android:pathPrefix="/smarthealthmonitor" />
-            </intent-filter>
-        </service>
-    </application>
+            <!-- AndroidManifest.xml — dentro de <application> -->
+            <service
+                android:name=".data.WearListenerService"
+                android:exported="true">
+                <intent-filter>
+                    <!-- Acción necesaria para recibir mensajes de Wear OS -->
+                    <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
 
-</manifest>
+                    <!-- Filtro para el path específico definido en el reloj -->
+                    <data
+                        android:host="*"
+                        android:scheme="wear"
+                        android:pathPrefix="/smarthealthmonitor" />
+                </intent-filter>
+            </service>
+        </application>
+
+    </manifest>

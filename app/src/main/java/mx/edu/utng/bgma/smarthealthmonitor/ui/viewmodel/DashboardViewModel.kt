@@ -1,5 +1,6 @@
 package mx.edu.utng.bgma.smarthealthmonitor.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
@@ -43,4 +44,27 @@ class DashboardViewModel : ViewModel() {
             started      = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()
         )
-}
+
+
+    fun enviarAlertaEmergencia() {
+        // Aquí implementas la lógica real de enviar alerta
+        // Por ejemplo: enviar SMS, notificaciones push, llamada a API, etc.
+
+        // Log para debug
+        Log.d("DashboardViewModel", "🚨 ALERTA DE EMERGENCIA ENVIADA")
+        Log.d("DashboardViewModel", "FC actual: ${fc.value} bpm")
+
+        // Puedes agregar más lógica aquí:
+        // - Guardar en base de datos que se envió una alerta
+        // - Llamar a un servicio de emergencias
+        // - Enviar notificación a contactos de emergencia
+        // - Mostrar un Toast o Snackbar
+
+        // Ejemplo: Llamar a un repositorio para enviar la alerta
+        // SmartHealthRepository.enviarAlertaEmergencia(fc.value)
+
+        // También podrías disparar una notificación local
+        // NotificationHelper.sendEmergencyAlert(context, fc.value)
+    }
+    }
+
