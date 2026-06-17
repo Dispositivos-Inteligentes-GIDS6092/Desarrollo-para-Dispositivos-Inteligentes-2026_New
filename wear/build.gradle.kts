@@ -38,6 +38,13 @@ android {
 }
 
 dependencies {
+
+    implementation("androidx.wear.watchface:watchface:1.2.1")
+    implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.1")
+    implementation("androidx.wear.watchface:watch-face-style:1.2.1")
+
+
+    implementation(libs.ads.mobile.sdk)
     implementation(libs.play.services.wearable)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

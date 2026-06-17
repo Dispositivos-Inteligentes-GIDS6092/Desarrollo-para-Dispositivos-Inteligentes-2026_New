@@ -16,7 +16,8 @@ import androidx.wear.compose.material.Text
 @Composable
 fun WearFCCard(
     fc: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    pasos: Int
 ) {
     val colorFC = if (fc in 60..100) {
         MaterialTheme.colors.primary
