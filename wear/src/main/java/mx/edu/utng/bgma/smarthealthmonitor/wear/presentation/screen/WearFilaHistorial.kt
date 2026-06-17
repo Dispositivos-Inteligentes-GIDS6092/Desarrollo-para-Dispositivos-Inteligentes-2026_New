@@ -9,6 +9,7 @@ import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ChipDefaults
 import androidx.wear.compose.material.Text
 import androidx.compose.ui.unit.dp
+import mx.edu.utng.bgma.smarthealthmonitor.data.db.LecturaFC
 
 @Composable
 fun WearFilaHistorial(lectura: LecturaFC) {
@@ -32,14 +33,6 @@ fun WearFilaHistorial(lectura: LecturaFC) {
         colors = ChipDefaults.secondaryChipColors(),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 4.dp)
+            .padding(horizontal = 4.dp, vertical = 2.dp)
     )
 }
-
-// Data class para LecturaFC (si no existe)
-data class LecturaFC(
-    val id: String = "",
-    val valorBpm: Int,
-    val hora: String,
-    val esNormal: Boolean = true
-)

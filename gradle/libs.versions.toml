@@ -40,6 +40,7 @@ androidx-wear-tooling-preview = { group = "androidx.wear", name = "wear-tooling-
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-compose-navigation = { group = "androidx.wear.compose", name = "compose-navigation", version.ref = "composeNavigation" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 ads-mobile-sdk = { group = "com.google.android.libraries.ads.mobile.sdk", name = "ads-mobile-sdk", version.ref = "adsMobileSdk" }
 
 [plugins]

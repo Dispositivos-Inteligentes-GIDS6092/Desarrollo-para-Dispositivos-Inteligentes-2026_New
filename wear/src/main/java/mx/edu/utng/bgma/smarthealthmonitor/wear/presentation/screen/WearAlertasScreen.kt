@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -30,8 +33,12 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.scrollAway
+import kotlinx.coroutines.launch
+import mx.edu.utng.bgma.smarthealthmonitor.data.SmartHealthRepository
+import mx.edu.utng.bgma.smarthealthmonitor.wear.HealthDataService
 import mx.edu.utng.bgma.smarthealthmonitor.wear.presentation.WearDashboardViewModel
 import mx.edu.utng.bgma.smarthealthmonitor.wear.presentation.components.WearFCCard
+import kotlin.random.Random
 
 @Composable
 fun WearAlertasScreen(
@@ -59,7 +66,6 @@ fun WearAlertasScreen(
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Botón Confirmar
             Button(
                 onClick = onConfirmar,
                 modifier = Modifier.size(52.dp),
@@ -67,15 +73,14 @@ fun WearAlertasScreen(
                     backgroundColor = MaterialTheme.colors.error
                 )
             ) {
-                Text("✓", fontSize = 24.sp)  // Usar texto en lugar de icono
+                Text("✓", fontSize = 24.sp)
             }
 
-            // Botón Cancelar
             Button(
                 onClick = onCancelar,
                 modifier = Modifier.size(52.dp)
             ) {
-                Text("✗", fontSize = 24.sp)  // Usar texto en lugar de icono
+                Text("✗", fontSize = 24.sp)
             }
         }
     }
@@ -83,16 +88,19 @@ fun WearAlertasScreen(
 
 @Composable
 fun WearDashboardScreen(
-    onAlertClick: () -> Unit = {},
+    onAlertClick: () -> Unit,
+    onHistorialClick: () -> Unit,
     viewModel: WearDashboardViewModel = viewModel()
 ) {
     val fc by viewModel.fc.collectAsState()
-    val steps by viewModel.pasos.collectAsState()
+    val pasos by viewModel.pasos.collectAsState()
     val listState = rememberScalingLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Scaffold(
         timeText = {
-            TimeText(modifier = Modifier.Companion.scrollAway(listState))
+            TimeText(modifier = Modifier.scrollAway(listState))
         },
         positionIndicator = {
             PositionIndicator(scalingLazyListState = listState)
@@ -110,14 +118,29 @@ fun WearDashboardScreen(
             ),
             autoCentering = AutoCenteringParams(itemIndex = 0)
         ) {
-            // Item 1: Card de FC
             item {
                 WearFCCard(
                     fc = fc,
+                    pasos = pasos
                 )
             }
 
-            // Item 2: Chip de Alerta
+            item {
+                Button(
+                    onClick = {
+                        val randomFC = Random.nextInt(60, 150)
+                        coroutineScope.launch {
+                            SmartHealthRepository.actualizarFC(randomFC)
+                            HealthDataService.enviarFCDirectamente(context, randomFC)
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.primaryButtonColors()
+                ) {
+                    Text("Enviar datos")
+                }
+            }
+
             item {
                 Chip(
                     label = { Text("⚠️ Alerta") },
@@ -125,15 +148,22 @@ fun WearDashboardScreen(
                     colors = ChipDefaults.primaryChipColors(
                         backgroundColor = MaterialTheme.colors.error
                     ),
-                    modifier = Modifier.Companion.fillMaxWidth()  // Solo fillMaxWidth, no fillMaxSize
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
 
-            // CompactChip de pasos
+            item {
+                Chip(
+                    label = { Text("📋 Historial") },
+                    onClick = onHistorialClick,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
             item {
                 CompactChip(
                     label = {
-                        Text(if (steps > 0) "$steps pasos" else "— pasos")
+                        Text(if (pasos > 0) "$pasos pasos" else "— pasos")
                     },
                     onClick = { /* Opcional */ },
                     modifier = Modifier.fillMaxWidth()
