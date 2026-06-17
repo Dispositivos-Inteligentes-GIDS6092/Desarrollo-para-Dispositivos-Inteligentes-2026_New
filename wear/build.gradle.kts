@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.ads.mobile.sdk)
     implementation(libs.play.services.wearable)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
@@ -49,15 +50,19 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.compose.navigation)
+    
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
     implementation("androidx.health:health-services-client:1.1.0-alpha03")
     implementation("com.google.guava:guava:33.0.0-android")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.7.3")
-    implementation(libs.androidx.compose.navigation)
+    
+    // Watch Face
     implementation("androidx.wear.watchface:watchface:1.2.1")
     implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.1")
     implementation("androidx.wear.watchface:watchface-style:1.2.1")
 
-    // AGREGAR: dependencia al módulo shared
+    // Dependencia al módulo shared
     implementation(project(":shared"))
 }

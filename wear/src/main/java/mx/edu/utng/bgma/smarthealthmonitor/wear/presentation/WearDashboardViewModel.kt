@@ -11,25 +11,29 @@ import mx.edu.utng.bgma.smarthealthmonitor.data.db.LecturaFC
 
 class WearDashboardViewModel : ViewModel() {
 
-    // Reutiliza el mismo Repository del módulo app
-
-    // otro commit
+    // Flujo de FC con valor por defecto
     val fc: StateFlow<Int> = SmartHealthRepository.fcFlow
-        .map { if (it == 0) 72 else it }  // valor por defecto
+        .map { if (it == 0) 72 else it }
         .stateIn(
             viewModelScope,
-            SharingStarted.Companion.WhileSubscribed(5_000), 72)
+            SharingStarted.WhileSubscribed(5_000),
+            72
+        )
 
-    // Reto adicional: Flujo de pasos
+    // Flujo de pasos
     val pasos: StateFlow<Int> = SmartHealthRepository.pasosFlow
-        .stateIn(viewModelScope,
-            SharingStarted.Companion.WhileSubscribed(5_000), 0)
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5_000),
+            0
+        )
+
     // ← NUEVO: historial desde Room
     val historial: StateFlow<List<LecturaFC>> =
         SmartHealthRepository.obtenerHistorial()
-            .stateIn(viewModelScope,
+            .stateIn(
+                viewModelScope,
                 SharingStarted.WhileSubscribed(5_000),
-                emptyList())
-
-
+                emptyList()
+            )
 }
