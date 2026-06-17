@@ -27,7 +27,6 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <!-- ACTIVITY PRINCIPAL -->
         <activity
             android:name=".presentation.WearMainActivity"
             android:exported="true"
