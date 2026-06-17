@@ -11,7 +11,7 @@ import mx.edu.utng.bgma.smarthealthmonitor.data.db.LecturaFC
 
 class WearDashboardViewModel : ViewModel() {
 
-    // Reutiliza el mismo Repository del módulo app
+
     val fc: StateFlow<Int> = SmartHealthRepository.fcFlow
         .map { if (it == 0) 72 else it }  // valor por defecto
         .stateIn(
