@@ -7,7 +7,6 @@ import androidx.health.services.client.PassiveListenerService
 import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.PassiveListenerConfig
-import androidx.health.services.client.data.SampleDataPoint
 import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.Wearable
@@ -53,8 +52,8 @@ class HealthDataService : PassiveListenerService() {
     override fun onNewDataPointsReceived(dataPoints: DataPointContainer) {
         val fcDataPoints = dataPoints.getData(DataType.HEART_RATE_BPM)
         val lastFC = fcDataPoints.lastOrNull()
-        if (lastFC is SampleDataPoint<Double>) {
-            val bpm = lastFC.value.toInt()
+        if (lastFC != null) {
+            val bpm = (lastFC.value as Number).toInt()
             Log.d(TAG, "FC recibida (última del lote): $bpm BPM")
              scope.launch {
                 enviarFC(bpm)
@@ -62,16 +61,9 @@ class HealthDataService : PassiveListenerService() {
         }
 
         val stepsDataPoints = dataPoints.getData(DataType.STEPS_DAILY)
-        Log.d("MiAppDebug", "Contenido de pasos: $stepsDataPoints")
         val lastSteps = stepsDataPoints.lastOrNull()
         if (lastSteps != null) {
-            val value = lastSteps.value
-            val pasos = when (value) {
-                is Long -> value.toInt()
-                is Double -> value.toInt()
-                is Int -> value
-                else -> value.toString().toIntOrNull() ?: 0
-            }
+            val pasos = (lastSteps.value as Number).toInt()
             Log.d(TAG, "Pasos recibidos (últimos del lote): $pasos")
             scope.launch {
                 enviarPasos(pasos)
