@@ -6,11 +6,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LecturaFCDao {
 
-
-
-
-
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(lectura: LecturaFC)
 
