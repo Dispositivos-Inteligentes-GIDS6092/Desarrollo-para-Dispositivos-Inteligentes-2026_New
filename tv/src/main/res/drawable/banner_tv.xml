@@ -1,0 +1,16 @@
+<!-- tv/src/main/res/drawable/banner_tv.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+    <path
+        android:fillColor="#1B4F8A"
+        android:pathData="M0,0h320v180h-320z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,70h120v40h-120z"/>
+    <path
+        android:fillColor="#D4860A"
+        android:pathData="M140,85h40v10h-40z"/>
+</vector>

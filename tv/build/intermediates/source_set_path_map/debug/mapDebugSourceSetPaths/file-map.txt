@@ -1,0 +1,67 @@
+mx.utng.smarthealthmonitor.tv-lifecycle-livedata-core-2.9.4-0 C:\Users\Diego\.gradle\caches\8.13\transforms\09cdcfb4fa3f0bcdbd0145851ba557ac\transformed\lifecycle-livedata-core-2.9.4\res
+mx.utng.smarthealthmonitor.tv-navigation-runtime-ktx-2.8.7-1 C:\Users\Diego\.gradle\caches\8.13\transforms\10928e19dd7e4980cc2578f4e511d3dd\transformed\navigation-runtime-ktx-2.8.7\res
+mx.utng.smarthealthmonitor.tv-lifecycle-viewmodel-release-2 C:\Users\Diego\.gradle\caches\8.13\transforms\12406948aa743d09cc73c015d9c003cc\transformed\lifecycle-viewmodel-release\res
+mx.utng.smarthealthmonitor.tv-play-services-cast-22.0.0-3 C:\Users\Diego\.gradle\caches\8.13\transforms\14a52a59eddd1108bc0e0766ddeb6e8a\transformed\play-services-cast-22.0.0\res
+mx.utng.smarthealthmonitor.tv-play-services-basement-18.9.0-4 C:\Users\Diego\.gradle\caches\8.13\transforms\1617793c6ae73dac60d75a4dbd859039\transformed\play-services-basement-18.9.0\res
+mx.utng.smarthealthmonitor.tv-savedstate-release-5 C:\Users\Diego\.gradle\caches\8.13\transforms\1901a86e0b6c0c17103e22e31b3e5b61\transformed\savedstate-release\res
+mx.utng.smarthealthmonitor.tv-mediarouter-1.7.0-6 C:\Users\Diego\.gradle\caches\8.13\transforms\1a1700a02c97a9fdf4fcfa6e40d3af4e\transformed\mediarouter-1.7.0\res
+mx.utng.smarthealthmonitor.tv-sqlite-framework-2.4.0-7 C:\Users\Diego\.gradle\caches\8.13\transforms\1e4c0a8bd820b7a7dc667dffb941291a\transformed\sqlite-framework-2.4.0\res
+mx.utng.smarthealthmonitor.tv-startup-runtime-1.1.1-8 C:\Users\Diego\.gradle\caches\8.13\transforms\1fd762154183224423171d834e4d3930\transformed\startup-runtime-1.1.1\res
+mx.utng.smarthealthmonitor.tv-activity-compose-1.10.0-9 C:\Users\Diego\.gradle\caches\8.13\transforms\23914bcc412105550d8cbadb0e4ae0fd\transformed\activity-compose-1.10.0\res
+mx.utng.smarthealthmonitor.tv-material-icons-core-release-10 C:\Users\Diego\.gradle\caches\8.13\transforms\26ac3c46f62e9de5cb15dd41adcd0a9b\transformed\material-icons-core-release\res
+mx.utng.smarthealthmonitor.tv-tv-foundation-1.0.0-alpha11-11 C:\Users\Diego\.gradle\caches\8.13\transforms\2eaabb60dbabcc3cad698a56dcc8fcd8\transformed\tv-foundation-1.0.0-alpha11\res
+mx.utng.smarthealthmonitor.tv-play-services-base-18.5.0-12 C:\Users\Diego\.gradle\caches\8.13\transforms\2f75fd7583b3dd2c4b661e6469ed1b33\transformed\play-services-base-18.5.0\res
+mx.utng.smarthealthmonitor.tv-foundation-layout-release-13 C:\Users\Diego\.gradle\caches\8.13\transforms\324d9df82b3ea55283b45897cd9f8e74\transformed\foundation-layout-release\res
+mx.utng.smarthealthmonitor.tv-customview-poolingcontainer-1.0.0-14 C:\Users\Diego\.gradle\caches\8.13\transforms\36d93eac04f1030efd3b866c21dd3b41\transformed\customview-poolingcontainer-1.0.0\res
+mx.utng.smarthealthmonitor.tv-media3-ui-1.4.1-15 C:\Users\Diego\.gradle\caches\8.13\transforms\37474a17e79c60989709c8010e550a84\transformed\media3-ui-1.4.1\res
+mx.utng.smarthealthmonitor.tv-graphics-path-1.0.1-16 C:\Users\Diego\.gradle\caches\8.13\transforms\386bb81833ccaf195b13c9cf9372ac83\transformed\graphics-path-1.0.1\res
+mx.utng.smarthealthmonitor.tv-emoji2-1.4.0-17 C:\Users\Diego\.gradle\caches\8.13\transforms\3c63b52f729412d7ac88a96706e4fc82\transformed\emoji2-1.4.0\res
+mx.utng.smarthealthmonitor.tv-ui-release-18 C:\Users\Diego\.gradle\caches\8.13\transforms\3dd90fa2aedbf6ac4c3cbde40b5552a0\transformed\ui-release\res
+mx.utng.smarthealthmonitor.tv-ui-graphics-release-19 C:\Users\Diego\.gradle\caches\8.13\transforms\4885608a2fe8ec2f16903309fca9f54f\transformed\ui-graphics-release\res
+mx.utng.smarthealthmonitor.tv-savedstate-ktx-1.3.1-20 C:\Users\Diego\.gradle\caches\8.13\transforms\529b9de1b296dec97dbdf5ca6338d7d5\transformed\savedstate-ktx-1.3.1\res
+mx.utng.smarthealthmonitor.tv-core-runtime-2.2.0-21 C:\Users\Diego\.gradle\caches\8.13\transforms\56e363628b227138ae14cddee397bae8\transformed\core-runtime-2.2.0\res
+mx.utng.smarthealthmonitor.tv-media-1.7.0-22 C:\Users\Diego\.gradle\caches\8.13\transforms\58c467aed418b87be2ba4853084ef5b1\transformed\media-1.7.0\res
+mx.utng.smarthealthmonitor.tv-animation-core-release-23 C:\Users\Diego\.gradle\caches\8.13\transforms\5ad8802be12d58331bd0cc51a672f1cc\transformed\animation-core-release\res
+mx.utng.smarthealthmonitor.tv-tv-material-1.0.0-rc02-24 C:\Users\Diego\.gradle\caches\8.13\transforms\5b4a60a652c704b8a8f022249f43678e\transformed\tv-material-1.0.0-rc02\res
+mx.utng.smarthealthmonitor.tv-core-viewtree-1.0.0-25 C:\Users\Diego\.gradle\caches\8.13\transforms\5c1c7d82e11d30cd2b399223c83af004\transformed\core-viewtree-1.0.0\res
+mx.utng.smarthealthmonitor.tv-media3-exoplayer-1.4.1-26 C:\Users\Diego\.gradle\caches\8.13\transforms\6293190e4847650ca42f13bc578ca418\transformed\media3-exoplayer-1.4.1\res
+mx.utng.smarthealthmonitor.tv-recyclerview-1.3.0-27 C:\Users\Diego\.gradle\caches\8.13\transforms\62a188de336b513d5278ac6a076b019c\transformed\recyclerview-1.3.0\res
+mx.utng.smarthealthmonitor.tv-lifecycle-livedata-2.9.4-28 C:\Users\Diego\.gradle\caches\8.13\transforms\7dd9470ba2779b7108ca5aa1917c1d47\transformed\lifecycle-livedata-2.9.4\res
+mx.utng.smarthealthmonitor.tv-lifecycle-viewmodel-ktx-2.9.4-29 C:\Users\Diego\.gradle\caches\8.13\transforms\7e5fa093dfda09647214d1c5f684233e\transformed\lifecycle-viewmodel-ktx-2.9.4\res
+mx.utng.smarthealthmonitor.tv-profileinstaller-1.4.0-30 C:\Users\Diego\.gradle\caches\8.13\transforms\821074212d09af03878b250c376ce5cd\transformed\profileinstaller-1.4.0\res
+mx.utng.smarthealthmonitor.tv-lifecycle-viewmodel-compose-release-31 C:\Users\Diego\.gradle\caches\8.13\transforms\85aae43568db3f5e19d99de737f75061\transformed\lifecycle-viewmodel-compose-release\res
+mx.utng.smarthealthmonitor.tv-navigation-compose-2.8.7-32 C:\Users\Diego\.gradle\caches\8.13\transforms\85c77c6e1f5edd0ccb130a0dd8123878\transformed\navigation-compose-2.8.7\res
+mx.utng.smarthealthmonitor.tv-fragment-1.6.1-33 C:\Users\Diego\.gradle\caches\8.13\transforms\87b7089485cbfe35fc742143c1339d43\transformed\fragment-1.6.1\res
+mx.utng.smarthealthmonitor.tv-play-services-cast-framework-22.0.0-34 C:\Users\Diego\.gradle\caches\8.13\transforms\93ae55ee564162c588ce8948c604ee2e\transformed\play-services-cast-framework-22.0.0\res
+mx.utng.smarthealthmonitor.tv-room-runtime-2.6.1-35 C:\Users\Diego\.gradle\caches\8.13\transforms\9419424a2cd097d5f2c8156512639467\transformed\room-runtime-2.6.1\res
+mx.utng.smarthealthmonitor.tv-lifecycle-livedata-core-ktx-2.9.4-36 C:\Users\Diego\.gradle\caches\8.13\transforms\a1f2755096c151935ba78deb6f1a8fd9\transformed\lifecycle-livedata-core-ktx-2.9.4\res
+mx.utng.smarthealthmonitor.tv-foundation-release-37 C:\Users\Diego\.gradle\caches\8.13\transforms\a86be985dd29e107625324ad62d640d9\transformed\foundation-release\res
+mx.utng.smarthealthmonitor.tv-lifecycle-runtime-compose-release-38 C:\Users\Diego\.gradle\caches\8.13\transforms\a8c28e6442579a842ce50b069da421f0\transformed\lifecycle-runtime-compose-release\res
+mx.utng.smarthealthmonitor.tv-annotation-experimental-1.4.1-39 C:\Users\Diego\.gradle\caches\8.13\transforms\aa34c6c534f51bf0c12b60b92677be05\transformed\annotation-experimental-1.4.1\res
+mx.utng.smarthealthmonitor.tv-navigation-runtime-2.8.7-40 C:\Users\Diego\.gradle\caches\8.13\transforms\ab8cb9ad4fcdf6af59b842c3cf5021d1\transformed\navigation-runtime-2.8.7\res
+mx.utng.smarthealthmonitor.tv-lifecycle-runtime-release-41 C:\Users\Diego\.gradle\caches\8.13\transforms\aebcc1af271967bfd64c83ed1ad62da5\transformed\lifecycle-runtime-release\res
+mx.utng.smarthealthmonitor.tv-sqlite-2.4.0-42 C:\Users\Diego\.gradle\caches\8.13\transforms\b3bbb6187ac542150a3543f3dfd3815b\transformed\sqlite-2.4.0\res
+mx.utng.smarthealthmonitor.tv-core-ktx-1.15.0-43 C:\Users\Diego\.gradle\caches\8.13\transforms\b708053688463eb71f20033f96ef0251\transformed\core-ktx-1.15.0\res
+mx.utng.smarthealthmonitor.tv-activity-ktx-1.10.0-44 C:\Users\Diego\.gradle\caches\8.13\transforms\ba7fbd7b089ba807890cc5e3db835c24\transformed\activity-ktx-1.10.0\res
+mx.utng.smarthealthmonitor.tv-navigation-common-ktx-2.8.7-45 C:\Users\Diego\.gradle\caches\8.13\transforms\c7a5a81039ea0d4774c0dcc967255541\transformed\navigation-common-ktx-2.8.7\res
+mx.utng.smarthealthmonitor.tv-tracing-1.2.0-46 C:\Users\Diego\.gradle\caches\8.13\transforms\c976ed3ead53f8cfb8cb72ab565aa5bc\transformed\tracing-1.2.0\res
+mx.utng.smarthealthmonitor.tv-savedstate-compose-release-47 C:\Users\Diego\.gradle\caches\8.13\transforms\ce57e37438b02e8f8b7d4fdfc5d86f64\transformed\savedstate-compose-release\res
+mx.utng.smarthealthmonitor.tv-core-1.15.0-48 C:\Users\Diego\.gradle\caches\8.13\transforms\dca0038be7c683189232a3269d34dd12\transformed\core-1.15.0\res
+mx.utng.smarthealthmonitor.tv-glide-5.0.0-rc01-49 C:\Users\Diego\.gradle\caches\8.13\transforms\e2472681a0dfa77d4fd92599b6ef4a92\transformed\glide-5.0.0-rc01\res
+mx.utng.smarthealthmonitor.tv-room-ktx-2.6.1-50 C:\Users\Diego\.gradle\caches\8.13\transforms\e3b5d850bc564414e804525eb5daa849\transformed\room-ktx-2.6.1\res
+mx.utng.smarthealthmonitor.tv-navigation-common-2.8.7-51 C:\Users\Diego\.gradle\caches\8.13\transforms\e9ee06d46f92c13bf134cc0aad2e5068\transformed\navigation-common-2.8.7\res
+mx.utng.smarthealthmonitor.tv-appcompat-resources-1.2.0-52 C:\Users\Diego\.gradle\caches\8.13\transforms\eb7aa3cde8a01378ce426ff40db49ba8\transformed\appcompat-resources-1.2.0\res
+mx.utng.smarthealthmonitor.tv-lifecycle-process-2.9.4-53 C:\Users\Diego\.gradle\caches\8.13\transforms\eed6fc2fb921383ab9ee537d4e2d61ff\transformed\lifecycle-process-2.9.4\res
+mx.utng.smarthealthmonitor.tv-appcompat-1.1.0-54 C:\Users\Diego\.gradle\caches\8.13\transforms\efb024e445f1cda18cd8189c1b4c7bf1\transformed\appcompat-1.1.0\res
+mx.utng.smarthealthmonitor.tv-activity-1.10.0-55 C:\Users\Diego\.gradle\caches\8.13\transforms\f0f05c6ec9243b6ea8caae025b92968c\transformed\activity-1.10.0\res
+mx.utng.smarthealthmonitor.tv-animation-release-56 C:\Users\Diego\.gradle\caches\8.13\transforms\fe4876f26f83d9b7d26285e7019422a0\transformed\animation-release\res
+mx.utng.smarthealthmonitor.tv-lifecycle-viewmodel-savedstate-release-57 C:\Users\Diego\.gradle\caches\8.13\transforms\fff8b003f503e82368303fcb29db2ae0\transformed\lifecycle-viewmodel-savedstate-release\res
+mx.utng.smarthealthmonitor.tv-debug-58 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\shared\build\intermediates\packaged_res\debug\packageDebugResources
+mx.utng.smarthealthmonitor.tv-pngs-59 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\build\generated\res\pngs\debug
+mx.utng.smarthealthmonitor.tv-resValues-60 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\build\generated\res\resValues\debug
+mx.utng.smarthealthmonitor.tv-updated_navigation_xml-61 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\build\generated\updated_navigation_xml\debug
+mx.utng.smarthealthmonitor.tv-packageDebugResources-62 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+mx.utng.smarthealthmonitor.tv-packageDebugResources-63 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+mx.utng.smarthealthmonitor.tv-debug-64 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\build\intermediates\merged_res\debug\mergeDebugResources
+mx.utng.smarthealthmonitor.tv-debug-65 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\src\debug\res
+mx.utng.smarthealthmonitor.tv-main-66 C:\Users\Diego\Desktop\MAYO-AGOSTO2026\DESARROLLO PARA DISPOSITIVOS INTELIGENTES\SmartHealthMonitor8\tv\src\main\res

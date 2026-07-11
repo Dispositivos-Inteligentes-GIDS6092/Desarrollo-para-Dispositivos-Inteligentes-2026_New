@@ -45,4 +45,14 @@ object SmartHealthRepository {
     suspend fun limpiarHistorialAntiguo(limite: Long = System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000L)) {
         dao?.limpiarViejos(limite)
     }
+
+    suspend fun generarDatosDePrueba() {
+        if ((dao?.contarRegistros() ?: 0) == 0) {
+            // Generar 10 lecturas aleatorias
+            for (i in 1..10) {
+                val bpm = (60..140).random()
+                actualizarFC(bpm)
+            }
+        }
+    }
 }
