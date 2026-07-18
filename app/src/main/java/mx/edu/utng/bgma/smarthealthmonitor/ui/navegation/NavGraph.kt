@@ -20,7 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utng.bgma.smarthealthmonitor.LoginScreen
 import mx.edu.utng.bgma.smarthealthmonitor.ui.components.DashboardScreen
-import mx.edu.utng.bgma.smarthealthmonitor.ui.screens.HistorialScreen
+import mx.edu.utng.bgma.smarthealthmonitor.ui.components.HistorialScreen
 import mx.edu.utng.bgma.smarthealthmonitor.ui.theme.SmartHealthMonitorTheme
 
 @Composable
@@ -74,31 +74,29 @@ fun SmartHealthNavGraph() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaEnConstruccion(titulo: String, onBack: () -> Unit) {
-    SmartHealthMonitorTheme {
-        Scaffold(topBar = {
-            TopAppBar(
-                title = { Text(titulo) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Regresar"
-                        )
-                    }
+    Scaffold(topBar = {
+        TopAppBar(
+            title = { Text(titulo) },
+            navigationIcon = {
+                IconButton(onClick = onBack) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Regresar"
+                    )
                 }
-            )
-        }) { pad ->
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .padding(pad),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    "Próximamente: $titulo",
-                    style = MaterialTheme.typography.titleMedium
-                )
             }
+        )
+    }) { pad ->
+        Box(
+            Modifier
+                .fillMaxSize()
+                .padding(pad),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                "Próximamente: $titulo",
+                style = MaterialTheme.typography.titleMedium
+            )
         }
     }
 }

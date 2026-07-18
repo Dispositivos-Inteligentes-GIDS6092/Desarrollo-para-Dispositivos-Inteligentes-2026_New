@@ -59,16 +59,16 @@ fun TarjetaDato(
                     text = unidad,
                     style = MaterialTheme.typography.titleSmall,
                     color = colorValor,
-                    modifier = Modifier.padding(bottom = 4.dp)
+                    modifier = Modifier.padding(bottom = 4.dp).weight(1f)
                 )
                 if (esNormal != null) {
-                    Spacer(Modifier.height(8.dp))
+                    Spacer(Modifier.width(8.dp))
                     AssistChip(
                         onClick = { },
-                        label = { Text(if (esNormal) "Normal" else "Consulta al médico") },
+                        label = { Text(if (esNormal) "Normal" else "Alerta") },
                         colors = AssistChipDefaults.assistChipColors(
-                            containerColor = if (esNormal) Color(0xFFC8E6C9) else Color(0xFFFFCDD2),
-                            labelColor = if (esNormal) Color(0xFF2E7D32) else Color(0xFFC62828)
+                            containerColor = if (esNormal) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer,
+                            labelColor = if (esNormal) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onErrorContainer
                         )
                     )
                 }

@@ -1,4 +1,4 @@
-package mx.utng.smarthealthmonitor.ui.screens
+package mx.edu.utng.bgma.smarthealthmonitor.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

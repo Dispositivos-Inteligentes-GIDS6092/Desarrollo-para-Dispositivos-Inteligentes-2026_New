@@ -13,6 +13,7 @@ import mx.edu.utng.bgma.smarthealthmonitor.data.db.SmartHealthDB
 object SmartHealthRepository {
     private val _fcFlow = MutableStateFlow(0)
     val fcFlow: StateFlow<Int> = _fcFlow.asStateFlow()
+    val fcActual: StateFlow<Int> get() = fcFlow
 
     private val _pasosFlow = MutableStateFlow(0)
     val pasosFlow: StateFlow<Int> = _pasosFlow.asStateFlow()
@@ -44,5 +45,15 @@ object SmartHealthRepository {
 
     suspend fun limpiarHistorialAntiguo(limite: Long = System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000L)) {
         dao?.limpiarViejos(limite)
+    }
+
+    suspend fun generarDatosDePrueba() {
+        if ((dao?.contarRegistros() ?: 0) == 0) {
+            // Generar 10 lecturas aleatorias
+            for (i in 1..10) {
+                val bpm = (60..140).random()
+                actualizarFC(bpm)
+            }
+        }
     }
 }

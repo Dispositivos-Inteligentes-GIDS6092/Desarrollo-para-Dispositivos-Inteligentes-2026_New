@@ -1,0 +1,53 @@
+{
+    "logs": [
+        {
+            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-63:/values-land/values-land.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\0bedf8b26fc96cfc3f064170f55088af\\transformed\\appcompat-1.1.0\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,125,196",
+                        "endColumns": "69,70,67",
+                        "endOffsets": "120,191,259"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\a3800a2bfc604522abbf3276c6e82cda\\transformed\\play-services-cast-framework-22.0.0\\res\\values-land\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "0,0,0,0,0,0",
+                        "startOffsets": "183,264,344,414,483,578",
+                        "endColumns": "80,79,69,68,94,90",
+                        "endOffsets": "263,343,413,482,577,668"
+                    },
+                    "to": {
+                        "startLines": "5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "264,349,433,507,580,679",
+                        "endColumns": "84,83,73,72,98,94",
+                        "endOffsets": "344,428,502,575,674,769"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\0fb1fa0dec28aaba440270425b492555\\transformed\\mediarouter-1.7.0\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,130,208",
+                        "endColumns": "74,77,74",
+                        "endOffsets": "125,203,278"
+                    },
+                    "to": {
+                        "startLines": "11,12,13",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "774,849,927",
+                        "endColumns": "74,77,74",
+                        "endOffsets": "844,922,997"
+                    }
+                }
+            ]
+        }
+    ]
+}

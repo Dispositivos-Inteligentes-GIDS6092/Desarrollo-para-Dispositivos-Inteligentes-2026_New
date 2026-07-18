@@ -12,6 +12,12 @@ interface LecturaFCDao {
     @Query("SELECT * FROM lecturas_fc ORDER BY timestamp DESC LIMIT 50")
     fun obtenerUltimas(): Flow<List<LecturaFC>>
 
+    @Query("SELECT * FROM lecturas_fc WHERE id = :id")
+    suspend fun obtenerPorId(id: Int): LecturaFC?
+
+    @Query("SELECT * FROM lecturas_fc ORDER BY timestamp DESC LIMIT 5")
+    suspend fun obtenerUltimos5(): List<LecturaFC>
+
     @Query("SELECT COUNT(*) FROM lecturas_fc")
     suspend fun contarRegistros(): Int
 

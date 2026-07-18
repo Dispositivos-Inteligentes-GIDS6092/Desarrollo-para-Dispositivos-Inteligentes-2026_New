@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta MD3 SmartHealth -->
+    <color name="sh_primary">#1B4F8A</color>
+    <color name="sh_amber">#D4860A</color>
+    <color name="sh_dark">#0D1117</color>
+    <color name="sh_error">#B3261E</color>
+    <color name="sh_success">#43A047</color>       <!-- Verde: lecturas normales -->
+    <color name="sh_error_dark">#5C1A1A</color>    <!-- Rojo oscuro: fondo de alerta en pantalla completa -->
+    <color name="white">#FFFFFF</color>
+</resources>

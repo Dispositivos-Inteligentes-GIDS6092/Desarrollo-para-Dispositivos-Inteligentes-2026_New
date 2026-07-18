@@ -3,6 +3,7 @@ package mx.edu.utng.bgma.smarthealthmonitor.data.db;
 import android.database.Cursor;
 import android.os.CancellationSignal;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
@@ -153,6 +154,94 @@ public final class LecturaFCDao_Impl implements LecturaFCDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Object obtenerPorId(final int id, final Continuation<? super LecturaFC> $completion) {
+    final String _sql = "SELECT * FROM lecturas_fc WHERE id = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, id);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<LecturaFC>() {
+      @Override
+      @Nullable
+      public LecturaFC call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfValorBpm = CursorUtil.getColumnIndexOrThrow(_cursor, "valorBpm");
+          final int _cursorIndexOfTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "timestamp");
+          final int _cursorIndexOfHora = CursorUtil.getColumnIndexOrThrow(_cursor, "hora");
+          final int _cursorIndexOfEsNormal = CursorUtil.getColumnIndexOrThrow(_cursor, "esNormal");
+          final LecturaFC _result;
+          if (_cursor.moveToFirst()) {
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpValorBpm;
+            _tmpValorBpm = _cursor.getInt(_cursorIndexOfValorBpm);
+            final long _tmpTimestamp;
+            _tmpTimestamp = _cursor.getLong(_cursorIndexOfTimestamp);
+            final String _tmpHora;
+            _tmpHora = _cursor.getString(_cursorIndexOfHora);
+            final boolean _tmpEsNormal;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfEsNormal);
+            _tmpEsNormal = _tmp != 0;
+            _result = new LecturaFC(_tmpId,_tmpValorBpm,_tmpTimestamp,_tmpHora,_tmpEsNormal);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object obtenerUltimos5(final Continuation<? super List<LecturaFC>> $completion) {
+    final String _sql = "SELECT * FROM lecturas_fc ORDER BY timestamp DESC LIMIT 5";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<LecturaFC>>() {
+      @Override
+      @NonNull
+      public List<LecturaFC> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfValorBpm = CursorUtil.getColumnIndexOrThrow(_cursor, "valorBpm");
+          final int _cursorIndexOfTimestamp = CursorUtil.getColumnIndexOrThrow(_cursor, "timestamp");
+          final int _cursorIndexOfHora = CursorUtil.getColumnIndexOrThrow(_cursor, "hora");
+          final int _cursorIndexOfEsNormal = CursorUtil.getColumnIndexOrThrow(_cursor, "esNormal");
+          final List<LecturaFC> _result = new ArrayList<LecturaFC>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final LecturaFC _item;
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpValorBpm;
+            _tmpValorBpm = _cursor.getInt(_cursorIndexOfValorBpm);
+            final long _tmpTimestamp;
+            _tmpTimestamp = _cursor.getLong(_cursorIndexOfTimestamp);
+            final String _tmpHora;
+            _tmpHora = _cursor.getString(_cursorIndexOfHora);
+            final boolean _tmpEsNormal;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfEsNormal);
+            _tmpEsNormal = _tmp != 0;
+            _item = new LecturaFC(_tmpId,_tmpValorBpm,_tmpTimestamp,_tmpHora,_tmpEsNormal);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
   }
 
   @Override

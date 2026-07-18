@@ -16,6 +16,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://repo.eclipse.org/content/repositories/paho-releases/") }
     }
 }
 
@@ -23,3 +24,4 @@ rootProject.name = "SmartHealthMonitor"
 include(":app")
 include(":wear")
 include(":shared")
+include(":tv")
