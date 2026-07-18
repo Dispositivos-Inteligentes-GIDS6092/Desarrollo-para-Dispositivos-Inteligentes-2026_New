@@ -43,6 +43,53 @@ Desarrollada como proyecto integrador — UTNG 9° Cuatrimestre 2025.
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
 ![img_4.png](img_4.png)
+## 🏗️ Arquitectura del Proyecto
+
+```mermaid
+graph TD
+    subgraph "Módulo App (Teléfono)"
+        A[DashboardScreen] --> B[DashboardViewModel]
+        A --> C[CastButton]
+        C --> D[Chromecast]
+    end
+    
+    subgraph "Módulo Wear OS"
+        E[WearDashboardScreen] --> F[WearHistorialScreen]
+        E --> G[WearSensors]
+    end
+    
+    subgraph "Módulo TV"
+        H[TvCatalogScreen] --> I[TvDetailScreen]
+        I --> J[TvPlaybackScreen]
+        J --> K[ExoPlayer]
+    end
+    
+    subgraph "Capa de Datos"
+        L[Room Database]
+        M[Repository]
+        N[SensorManager]
+    end
+    
+    A --> M
+    B --> L
+    E --> N
+    E --> M
+    F --> L
+    H --> M
+    I --> L
+    
+    M --> L
+    N --> M
+    
+    D --> J
+```
+
+### Tecnologías principales:
+- **App**: Jetpack Compose, Material3, Room, Cast SDK
+- **Wear**: Wear Compose, Horologist, SensorManager
+- **TV**: Compose for TV, ExoPlayer, D-pad Navigation
+- **Arquitectura**: Clean Architecture + MVVM
+
 ## Autor
 Lizeth Ramírez — UTNG — Ing. en Desarrollo y Gestión de Software
 rmm.che@gmail.com

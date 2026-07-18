@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-61:/values-land/values-land.xml",
+            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-63:/values-land/values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\efb024e445f1cda18cd8189c1b4c7bf1\\transformed\\appcompat-1.1.0\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\0bedf8b26fc96cfc3f064170f55088af\\transformed\\appcompat-1.1.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\93ae55ee564162c588ce8948c604ee2e\\transformed\\play-services-cast-framework-22.0.0\\res\\values-land\\values.xml",
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\a3800a2bfc604522abbf3276c6e82cda\\transformed\\play-services-cast-framework-22.0.0\\res\\values-land\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9",
                         "startColumns": "0,0,0,0,0,0",
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\1a1700a02c97a9fdf4fcfa6e40d3af4e\\transformed\\mediarouter-1.7.0\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\0fb1fa0dec28aaba440270425b492555\\transformed\\mediarouter-1.7.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

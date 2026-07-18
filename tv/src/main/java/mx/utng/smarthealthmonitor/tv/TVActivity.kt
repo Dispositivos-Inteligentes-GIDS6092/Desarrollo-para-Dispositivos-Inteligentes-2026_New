@@ -14,48 +14,26 @@ import mx.utng.smarthealthmonitor.tv.presentation.TvPlaybackScreen
 import mx.utng.smarthealthmonitor.tv.ui.theme.SmartHealthTvTheme
 
 class TVActivity : ComponentActivity() {
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
         setContent {
             SmartHealthTvTheme {
                 val navController = rememberNavController()
-                
-                NavHost(
-                    navController = navController,
-                    startDestination = "catalog"
-                ) {
-                    // Ruta: Catálogo (lista de cards)
+                NavHost(navController, startDestination = "catalog") {
                     composable("catalog") {
-                        TvCatalogScreen(
-                            onCardClick = { lecturaId ->
-                                navController.navigate("detail/$lecturaId")
-                            }
-                        )
+                        TvCatalogScreen(onCardClick = { lecturaId ->
+                            navController.navigate("detail/$lecturaId")
+                        })
                     }
-                    
-                    // Ruta: Detalle (con parámetro lecturaId)
                     composable(
                         route = "detail/{lecturaId}",
-                        arguments = listOf(
-                            navArgument("lecturaId") { 
-                                type = NavType.IntType 
-                            }
-                        )
-                    ) { backStackEntry ->
-                        val id = backStackEntry.arguments?.getInt("lecturaId") ?: return@composable
-                        TvDetailScreen(
-                            lecturaId = id,
-                            navController = navController
-                        )
+                        arguments = listOf(navArgument("lecturaId") { type = NavType.IntType })
+                    ) { backStack ->
+                        val id = backStack.arguments?.getInt("lecturaId") ?: return@composable
+                        TvDetailScreen(lecturaId = id, navController = navController)
                     }
-                    
-                    // Ruta: Reproductor
                     composable("playback") {
-                        TvPlaybackScreen(
-                            navController = navController
-                        )
+                        TvPlaybackScreen(navController = navController)
                     }
                 }
             }

@@ -21,7 +21,8 @@ abstract class SmartHealthDB : RoomDatabase() {
                     context.applicationContext,
                     SmartHealthDB::class.java,
                     "smarthealthmonitor_db"
-                ).build().also { INSTANCE = it }
+                ).fallbackToDestructiveMigration()
+                    .build().also { INSTANCE = it }
             }
         }
     }

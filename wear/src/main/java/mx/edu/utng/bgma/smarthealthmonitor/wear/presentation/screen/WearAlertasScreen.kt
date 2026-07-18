@@ -1,6 +1,8 @@
 package mx.edu.utng.bgma.smarthealthmonitor.wear.presentation.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -8,10 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,6 +40,7 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.scrollAway
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mx.edu.utng.bgma.smarthealthmonitor.data.SmartHealthRepository
 import mx.edu.utng.bgma.smarthealthmonitor.wear.HealthDataService
@@ -94,13 +102,36 @@ fun WearDashboardScreen(
 ) {
     val fc by viewModel.fc.collectAsState()
     val pasos by viewModel.pasos.collectAsState()
+    val isMqttConnected by viewModel.isMqttConnected.collectAsState()
     val listState = rememberScalingLazyListState()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
+    var showSuccessMessage by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isMqttConnected) {
+        if (isMqttConnected) {
+            delay(10000)
+            showSuccessMessage = true
+            delay(5000)
+            showSuccessMessage = false
+        }
+    }
+
     Scaffold(
+// ...
         timeText = {
-            TimeText(modifier = Modifier.scrollAway(listState))
+            if (showSuccessMessage) {
+                Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth().padding(top = 2.dp)) {
+                    Text(
+                        "Servidor Conectado ✅",
+                        style = MaterialTheme.typography.caption2,
+                        color = Color(0xFF4CAF50)
+                    )
+                }
+            } else {
+                TimeText(modifier = Modifier.scrollAway(listState))
+            }
         },
         positionIndicator = {
             PositionIndicator(scalingLazyListState = listState)
@@ -123,6 +154,25 @@ fun WearDashboardScreen(
                     fc = fc,
                     pasos = pasos
                 )
+            }
+
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = {
+                            viewModel.manualMqttPublish()
+                        },
+                        modifier = Modifier
+                            .size(16.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color(0xFF0D1B4A)
+                        ),
+                        shape = CircleShape
+                    ) { }
+                }
             }
 
             item {

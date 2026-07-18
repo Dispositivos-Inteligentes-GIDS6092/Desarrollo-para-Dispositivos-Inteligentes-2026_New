@@ -39,16 +39,15 @@ fun LoginScreen(onLoginSuccess: () -> Unit = {}) {
         return emailError.isEmpty()
     }
 
-    SmartHealthMonitorTheme {
-        Scaffold { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(horizontal = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
+    Scaffold { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
 
                 // TODO 3: Ícono / Logo
                 Icon(
@@ -148,6 +147,5 @@ fun LoginScreen(onLoginSuccess: () -> Unit = {}) {
 
             } // Column
         } // Scaffold
-    } // Theme
 }
 

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-61:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-63:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\efb024e445f1cda18cd8189c1b4c7bf1\\transformed\\appcompat-1.1.0\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\0bedf8b26fc96cfc3f064170f55088af\\transformed\\appcompat-1.1.0\\res\\values-watch-v20\\values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

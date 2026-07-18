@@ -18,134 +18,99 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.tv.material3.*
-import mx.utng.smarthealthmonitor.tv.TvViewModel
-import mx.utng.smarthealthmonitor.tv.TvViewModelFactory
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun TvDetailScreen(
     lecturaId: Int,
     navController: NavController,
-    viewModel: TvViewModel = viewModel(factory = TvViewModelFactory(LocalContext.current)),
+    viewModel: TvViewModel = viewModel(factory = TvViewModelFactory(LocalContext.current))
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val lectura = state.lecturas.find { it.id == lecturaId } ?: return
-    
-    // FocusRequester para mover el foco al primer botón al entrar
+
     val firstBtnFocus = remember { FocusRequester() }
-    
-    LaunchedEffect(Unit) {
-        firstBtnFocus.requestFocus()
-    }
-    
+    LaunchedEffect(Unit) { firstBtnFocus.requestFocus() }
+
     Row(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0D1117))
+            .background(Color(0xFF0D1B4A))
             .padding(64.dp),
         horizontalArrangement = Arrangement.spacedBy(48.dp)
     ) {
-        // Panel izquierdo - ícono + datos
-        Column(
-            modifier = Modifier.weight(0.4f),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Ícono de corazón
+        // Panel izquierdo — ícono + datos
+        Column(Modifier.weight(0.4f), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Box(
                 modifier = Modifier
-                    .size(180.dp)
-                    .background(
-                        color = if (lectura.esNormal) Color(0xFF1B5E20) else Color(0xFFB3261E),
-                        shape = CircleShape
-                    ),
+                    .size(200.dp)
+                    .background(Color(0xFF1565C0), CircleShape),
                 contentAlignment = Alignment.Center
-            ) {
-                Text("❤", fontSize = 80.sp, color = Color.White)
-            }
-            
-            Text(
-                text = "${lectura.valorBpm} BPM",
-                style = MaterialTheme.typography.displayMedium,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold
-            )
-            
-            Text(
-                text = "Estado: ${if (lectura.esNormal) "✓ Normal" else "⚠ Alerta"}",
-                style = MaterialTheme.typography.titleLarge,
-                color = Color.White.copy(alpha = 0.8f)
-            )
-            
-            Text(
-                text = "Hora: ${lectura.hora}",
-                style = MaterialTheme.typography.bodyLarge,
-                color = Color.White.copy(alpha = 0.6f)
-            )
-        }
-        
-        // Panel derecho - botones de acción
-        Column(
-            modifier = Modifier.weight(0.6f),
-            verticalArrangement = Arrangement.spacedBy(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-            
-            // Botón Reproducir
-            Surface(
-                onClick = { 
-                    navController.navigate("playback") 
-                },
-                modifier = Modifier
-                    .focusRequester(firstBtnFocus)
-                    .fillMaxWidth(0.8f)
-                    .height(70.dp),
-                colors = ClickableSurfaceDefaults.colors(
-                    containerColor = Color(0xFF1B5E20),
-                    focusedContainerColor = Color(0xFF43A047)
-                ),
-                shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(12.dp))
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "▶ REPRODUCIR ALERTA",
-                        color = Color.White,
-                        style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
-            
-            // Botón Volver
-            Surface(
-                onClick = { 
-                    navController.popBackStack() 
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .height(70.dp),
-                colors = ClickableSurfaceDefaults.colors(
-                    containerColor = Color(0xFF37474F),
-                    focusedContainerColor = Color(0xFF546E7A)
-                ),
-                shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(12.dp))
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "← VOLVER",
-                        color = Color.White,
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.weight(1f))
-        }
-    }
-}
+              ) {
+                  Text("❤", fontSize = 80.sp, color = Color.White)
+              }
+              Text(
+                  text = "${lectura.valorBpm} bpm",
+                  style = MaterialTheme.typography.displayMedium,
+                  color = Color.White,
+                  fontWeight = FontWeight.ExtraBold
+              )
+              Text(
+                  text = "Estado: ${lectura.estado}",
+                  style = MaterialTheme.typography.bodyLarge,
+                  color = Color.White.copy(alpha = 0.8f)
+              )
+              Text(
+                  text = "Hora: ${lectura.hora}",
+                  style = MaterialTheme.typography.bodyMedium,
+                  color = Color.White.copy(alpha = 0.6f)
+              )
+          }
+
+          // Panel derecho — botones de acción
+          Column(
+              modifier = Modifier.weight(0.6f),
+              verticalArrangement = Arrangement.spacedBy(20.dp),
+              horizontalAlignment = Alignment.CenterHorizontally
+          ) {
+              Spacer(Modifier.weight(1f))
+
+              // Botón Reproducir
+              Surface(
+                  onClick = { navController.navigate("playback") },
+                  modifier = Modifier
+                      .focusRequester(firstBtnFocus)
+                      .fillMaxWidth(0.7f)
+                      .height(60.dp),
+                  colors = ClickableSurfaceDefaults.colors(
+                      containerColor = Color(0xFF1B5E20),
+                      focusedContainerColor = Color(0xFF76FF03)
+                  ),
+                  shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(8.dp))
+              ) {
+                  Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                      Text("▶ Reproducir", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                  }
+              }
+
+              // Botón Volver
+              Surface(
+                  onClick = { navController.popBackStack() },
+                  modifier = Modifier
+                      .fillMaxWidth(0.7f)
+                      .height(60.dp),
+                  colors = ClickableSurfaceDefaults.colors(
+                      containerColor = Color(0xFF37474F),
+                      focusedContainerColor = Color(0xFF90A4AE)
+                  ),
+                  shape = ClickableSurfaceDefaults.shape(RoundedCornerShape(8.dp))
+              ) {
+                  Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                      Text("← Volver", color = Color.White, fontSize = 18.sp)
+                  }
+              }
+
+              Spacer(Modifier.weight(1f))
+          }
+      }
+  }

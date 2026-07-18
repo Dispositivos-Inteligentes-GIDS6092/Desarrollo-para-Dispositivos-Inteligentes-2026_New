@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-61:/values-sw720dp-v13/values-sw720dp-v13.xml",
+            "outputFile": "mx.utng.smarthealthmonitor.tv-mergeDebugResources-63:/values-sw720dp-v13/values-sw720dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\1a1700a02c97a9fdf4fcfa6e40d3af4e\\transformed\\mediarouter-1.7.0\\res\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+                    "source": "C:\\Users\\Diego\\.gradle\\caches\\8.13\\transforms\\0fb1fa0dec28aaba440270425b492555\\transformed\\mediarouter-1.7.0\\res\\values-sw720dp-v13\\values-sw720dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

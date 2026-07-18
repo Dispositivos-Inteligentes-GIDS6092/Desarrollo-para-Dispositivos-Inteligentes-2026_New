@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "mx.edu.utng.bgma.smarthealthmonitor.tv",
+  "applicationId": "mx.edu.utng.bgma.smarthealthmonitor",
   "variantName": "debug",
   "elements": []
 }

@@ -1,38 +1,38 @@
 [
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/layout_activity_main.xml.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/layout/activity_main.xml"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/drawable_ic_heart.xml.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/drawable/ic_heart.xml"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/layout_activity_main.xml.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/layout/activity_main.xml"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/drawable_banner_tv.xml.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/drawable/banner_tv.xml"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/drawable_banner_tv.xml.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/drawable/banner_tv.xml"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/drawable_ic_alert_badge.xml.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/drawable/ic_alert_badge.xml"
     },
     {
-        "merged": "mx.utng.smarthealthmonitor.tv-debug-63:/drawable_ic_alert_badge.xml.flat",
-        "source": "mx.utng.smarthealthmonitor.tv-main-65:/drawable/ic_alert_badge.xml"
+        "merged": "mx.utng.smarthealthmonitor.tv-debug-65:/drawable_ic_heart.xml.flat",
+        "source": "mx.utng.smarthealthmonitor.tv-main-67:/drawable/ic_heart.xml"
     }
 ]

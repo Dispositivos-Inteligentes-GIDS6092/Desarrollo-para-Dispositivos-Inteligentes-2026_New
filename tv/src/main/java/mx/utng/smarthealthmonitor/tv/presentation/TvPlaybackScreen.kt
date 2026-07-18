@@ -17,69 +17,56 @@ import androidx.tv.material3.*
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun TvPlaybackScreen(
-    navController: NavController,
-) {
-    val context = LocalContext.current
-    
-    // Crear ExoPlayer con Media3 para audio/video de alerta
+fun TvPlaybackScreen(navController: NavController) {
+    val ctx = LocalContext.current
+
+    // Crear ExoPlayer optimizado para el emulador
     val exoPlayer = remember {
-        ExoPlayer.Builder(context).build().apply {
-            // Usando el audio de alerta de la guía oficial
+        ExoPlayer.Builder(ctx).build().apply {
+            // Video de prueba estable con sonido (Big Buck Bunny)
             val mediaItem = MediaItem.fromUri(
-                "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             )
             setMediaItem(mediaItem)
             prepare()
-            playWhenReady = true // Iniciar automáticamente
+            playWhenReady = true
+            volume = 1.0f // Sonido al máximo
         }
     }
-    
+
     // Liberar recursos al salir
     DisposableEffect(Unit) {
         onDispose {
             exoPlayer.release()
         }
     }
-    
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)
-    ) {
-        // Reproductor - Si es solo audio, mostrará una carátula genérica o controles
+
+    Box(Modifier.fillMaxSize().background(Color.Black)) {
+        // Vista del reproductor
         AndroidView(
-            factory = { ctx ->
-                PlayerView(ctx).apply {
+            factory = { context ->
+                PlayerView(context).apply {
                     player = exoPlayer
                     useController = true
-                    // Asegurar que el fondo sea negro si es video
-                    setBackgroundColor(android.graphics.Color.BLACK)
+                    setKeepScreenOn(true) // Evita que la TV se apague
                 }
             },
             modifier = Modifier.fillMaxSize()
         )
         
-        // Botón SALIR (Back) en la esquina superior izquierda
+        // Botón Volver (UI idéntica a la imagen)
         Surface(
             onClick = { 
                 exoPlayer.stop()
                 navController.popBackStack() 
             },
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(32.dp),
+            modifier = Modifier.align(Alignment.TopStart).padding(24.dp),
             colors = ClickableSurfaceDefaults.colors(
                 containerColor = Color(0x88000000),
                 focusedContainerColor = Color(0xCCFFFFFF)
             )
         ) {
-            Text(
-                text = "← SALIR",
-                color = Color.White,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-            )
+            Text("← Volver", color = Color.White, modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
         }
     }
 }

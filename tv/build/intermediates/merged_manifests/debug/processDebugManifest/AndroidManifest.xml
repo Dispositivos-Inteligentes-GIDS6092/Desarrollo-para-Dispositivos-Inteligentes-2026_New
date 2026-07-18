@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mx.edu.utng.bgma.smarthealthmonitor.tv"
+    package="mx.edu.utng.bgma.smarthealthmonitor"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,6 +9,7 @@
         android:targetSdkVersion="36" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Declarar que es una app de TV -->
     <uses-feature
@@ -19,8 +20,7 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-    <!-- This permission is required to check the state of and information about the current network. -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- This permission is required to start foreground services in Android P. -->
+    <!-- This permission is required to start foreground services in Android P. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <queries>
@@ -28,10 +28,10 @@
     </queries>
 
     <permission
-        android:name="mx.edu.utng.bgma.smarthealthmonitor.tv.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:name="mx.edu.utng.bgma.smarthealthmonitor.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="mx.edu.utng.bgma.smarthealthmonitor.tv.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+    <uses-permission android:name="mx.edu.utng.bgma.smarthealthmonitor.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="mx.utng.smarthealthmonitor.tv.SmartHealthTVApplication"
@@ -60,6 +60,19 @@
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="mx.utng.smarthealthmonitor.tv.TvCastOptionsProvider" />
 
+        <service
+            android:name="mx.utng.smarthealthmonitor.tv.TvWearListenerService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+
+                <data
+                    android:host="*"
+                    android:pathPrefix="/smarthealthmonitor"
+                    android:scheme="wear" />
+            </intent-filter>
+        </service>
+
         <receiver
             android:name="com.google.android.gms.cast.framework.media.MediaIntentReceiver"
             android:exported="false" />
@@ -79,7 +92,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="mx.edu.utng.bgma.smarthealthmonitor.tv.androidx-startup"
+            android:authorities="mx.edu.utng.bgma.smarthealthmonitor.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"

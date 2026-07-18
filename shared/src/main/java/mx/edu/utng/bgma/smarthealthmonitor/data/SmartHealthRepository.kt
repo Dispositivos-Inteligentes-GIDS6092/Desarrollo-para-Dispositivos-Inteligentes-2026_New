@@ -13,6 +13,7 @@ import mx.edu.utng.bgma.smarthealthmonitor.data.db.SmartHealthDB
 object SmartHealthRepository {
     private val _fcFlow = MutableStateFlow(0)
     val fcFlow: StateFlow<Int> = _fcFlow.asStateFlow()
+    val fcActual: StateFlow<Int> get() = fcFlow
 
     private val _pasosFlow = MutableStateFlow(0)
     val pasosFlow: StateFlow<Int> = _pasosFlow.asStateFlow()
