@@ -9,8 +9,17 @@ interface LecturaFCDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(lectura: LecturaFC)
 
+    @Upsert
+    suspend fun upsert(lectura: LecturaFC)
+
     @Query("SELECT * FROM lecturas_fc ORDER BY timestamp DESC LIMIT 50")
     fun obtenerUltimas(): Flow<List<LecturaFC>>
+
+    @Query("SELECT * FROM lecturas_fc WHERE sincronizado = 0")
+    suspend fun obtenerNoSincronizados(): List<LecturaFC>
+
+    @Query("UPDATE lecturas_fc SET sincronizado = 1 WHERE id = :id")
+    suspend fun marcarSincronizado(id: Int)
 
     @Query("SELECT * FROM lecturas_fc WHERE id = :id")
     suspend fun obtenerPorId(id: Int): LecturaFC?
