@@ -11,11 +11,13 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import mx.edu.utng.bgma.smarthealthmonitor.data.SmartHealthRepository
 import mx.edu.utng.bgma.smarthealthmonitor.data.db.LecturaFC
+import mx.edu.utng.bgma.smarthealthmonitor.wear.data.WearNeonRepository
 import mx.edu.utng.bgma.smarthealthmonitor.wear.mqtt.MqttWearPublisher
 
 class WearDashboardViewModel : ViewModel() {
 
     private val mqttPublisher = MqttWearPublisher()
+    private val neonRepository = WearNeonRepository()
     val isMqttConnected: StateFlow<Boolean> = mqttPublisher.isConnected
 
     init {
@@ -31,6 +33,11 @@ class WearDashboardViewModel : ViewModel() {
                         else -> "Normal"
                     }
                     mqttPublisher.publishFC(bpm, estado)
+                    
+                    // Publicar a Neon
+                    viewModelScope.launch {
+                        neonRepository.publicarANeon(bpm)
+                    }
                 }
             }
             .launchIn(viewModelScope)
