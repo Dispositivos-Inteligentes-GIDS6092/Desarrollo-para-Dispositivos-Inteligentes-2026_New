@@ -84,6 +84,10 @@ graph TD
     D --> J
 ```
 
+# PANTALLAS 
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+
 ### Tecnologías principales:
 - **App**: Jetpack Compose, Material3, Room, Cast SDK
 - **Wear**: Wear Compose, Horologist, SensorManager
