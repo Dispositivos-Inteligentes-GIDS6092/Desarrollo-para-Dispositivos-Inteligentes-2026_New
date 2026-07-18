@@ -1,6 +1,10 @@
 package mx.utng.smarthealthmonitor.tv.mqtt
 
 import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import mx.edu.utng.bgma.smarthealthmonitor.mqtt.MqttConfig
 import mx.edu.utng.bgma.smarthealthmonitor.mqtt.TvMessage
@@ -12,41 +16,46 @@ class MqttTvSubscriber(private val onMessageReceived: (TvMessage) -> Unit) {
     private var mqttClient: MqttClient? = null
     private val TAG = "MqttTvSubscriber"
     private val json = Json { ignoreUnknownKeys = true }
+    private val subscriberScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     fun connect() {
-        try {
-            val persistence = MemoryPersistence()
-            mqttClient = MqttClient(MqttConfig.BROKER_URL, MqttConfig.CLIENT_TV, persistence)
-            
-            val options = MqttConnectOptions().apply {
-                userName = MqttConfig.USERNAME
-                password = MqttConfig.PASSWORD.toCharArray()
-                socketFactory = SSLSocketFactory.getDefault()
-                isCleanSession = true
-                isAutomaticReconnect = true
-            }
-
-            mqttClient?.setCallback(object : MqttCallback {
-                override fun connectionLost(cause: Throwable?) {
-                    Log.e(TAG, "❌ Conexión perdida: ${cause?.message}")
+        subscriberScope.launch {
+            try {
+                val persistence = MemoryPersistence()
+                mqttClient = MqttClient(MqttConfig.BROKER_URL, MqttConfig.CLIENT_TV, persistence)
+                
+                val options = MqttConnectOptions().apply {
+                    userName = MqttConfig.USERNAME
+                    password = MqttConfig.PASSWORD.toCharArray()
+                    socketFactory = SSLSocketFactory.getDefault()
+                    isCleanSession = true
+                    isAutomaticReconnect = true
+                    connectionTimeout = 10
+                    keepAliveInterval = 20
                 }
 
-                override fun messageArrived(topic: String?, message: MqttMessage?) {
-                    if (topic == MqttConfig.TOPIC_TV) {
-                        val payload = message?.payload?.let { String(it) } ?: return
-                        Log.d(TAG, "📺 Recibido: $payload")
-                        handleTvMessage(payload)
+                mqttClient?.setCallback(object : MqttCallback {
+                    override fun connectionLost(cause: Throwable?) {
+                        Log.e(TAG, "❌ Conexión perdida: ${cause?.message}")
                     }
-                }
 
-                override fun deliveryComplete(token: IMqttDeliveryToken?) {}
-            })
+                    override fun messageArrived(topic: String?, message: MqttMessage?) {
+                        if (topic == MqttConfig.TOPIC_TV) {
+                            val payload = message?.payload?.let { String(it) } ?: return
+                            Log.d(TAG, "📺 Recibido: $payload")
+                            handleTvMessage(payload)
+                        }
+                    }
 
-            mqttClient?.connect(options)
-            mqttClient?.subscribe(MqttConfig.TOPIC_TV, MqttConfig.QOS)
-            Log.d(TAG, "✅ TV suscrita a ${MqttConfig.TOPIC_TV}")
-        } catch (e: Exception) {
-            Log.e(TAG, "❌ Error al conectar TV: ${e.message}")
+                    override fun deliveryComplete(token: IMqttDeliveryToken?) {}
+                })
+
+                mqttClient?.connect(options)
+                mqttClient?.subscribe(MqttConfig.TOPIC_TV, MqttConfig.QOS)
+                Log.d(TAG, "✅ TV suscrita a ${MqttConfig.TOPIC_TV}")
+            } catch (e: Exception) {
+                Log.e(TAG, "❌ Error al conectar TV MQTT: ${e.message}")
+            }
         }
     }
 
@@ -60,11 +69,13 @@ class MqttTvSubscriber(private val onMessageReceived: (TvMessage) -> Unit) {
     }
 
     fun disconnect() {
-        try {
-            mqttClient?.disconnect()
-            Log.d(TAG, "🔌 TV Desconectada")
-        } catch (e: Exception) {
-            Log.e(TAG, "❌ Error al desconectar TV: ${e.message}")
+        subscriberScope.launch {
+            try {
+                mqttClient?.disconnect()
+                Log.d(TAG, "🔌 TV Desconectada")
+            } catch (e: Exception) {
+                Log.e(TAG, "❌ Error al desconectar TV: ${e.message}")
+            }
         }
     }
 }

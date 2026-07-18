@@ -31,12 +31,12 @@ public final class SmartHealthDB_Impl extends SmartHealthDB {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS `lecturas_fc` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `valorBpm` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `hora` TEXT NOT NULL, `esNormal` INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `lecturas_fc` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `valorBpm` INTEGER NOT NULL, `timestamp` INTEGER NOT NULL, `hora` TEXT NOT NULL, `fecha` TEXT NOT NULL, `esNormal` INTEGER NOT NULL, `estado` TEXT NOT NULL, `dispositivo` TEXT NOT NULL, `sincronizado` INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '769981bf94b6b2101c19808596c249c2')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e05d4df9c6ded5919459ffc3984ba2ab')");
       }
 
       @Override
@@ -85,12 +85,16 @@ public final class SmartHealthDB_Impl extends SmartHealthDB {
       @NonNull
       public RoomOpenHelper.ValidationResult onValidateSchema(
           @NonNull final SupportSQLiteDatabase db) {
-        final HashMap<String, TableInfo.Column> _columnsLecturasFc = new HashMap<String, TableInfo.Column>(5);
+        final HashMap<String, TableInfo.Column> _columnsLecturasFc = new HashMap<String, TableInfo.Column>(9);
         _columnsLecturasFc.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLecturasFc.put("valorBpm", new TableInfo.Column("valorBpm", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLecturasFc.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLecturasFc.put("hora", new TableInfo.Column("hora", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLecturasFc.put("fecha", new TableInfo.Column("fecha", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsLecturasFc.put("esNormal", new TableInfo.Column("esNormal", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLecturasFc.put("estado", new TableInfo.Column("estado", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLecturasFc.put("dispositivo", new TableInfo.Column("dispositivo", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLecturasFc.put("sincronizado", new TableInfo.Column("sincronizado", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysLecturasFc = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesLecturasFc = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoLecturasFc = new TableInfo("lecturas_fc", _columnsLecturasFc, _foreignKeysLecturasFc, _indicesLecturasFc);
@@ -102,7 +106,7 @@ public final class SmartHealthDB_Impl extends SmartHealthDB {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "769981bf94b6b2101c19808596c249c2", "8a25280a8a8fdda8ad70f11733c41889");
+    }, "e05d4df9c6ded5919459ffc3984ba2ab", "04b50bf7ef0c539692f16016127009c9");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

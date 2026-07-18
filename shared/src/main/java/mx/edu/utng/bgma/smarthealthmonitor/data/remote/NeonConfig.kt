@@ -6,5 +6,5 @@ object NeonConfig {
     const val NEON_DB = "neondb"
     const val NEON_USER = "neondb_owner"
     const val NEON_PASSWORD = "npg_NPZySGIB40ou"
-    const val BASE_URL = "https://$NEON_HOST/"
+    const val BASE_URL = "https://$NEON_HOST/" // Retrofit concatenará 'sql'
 }

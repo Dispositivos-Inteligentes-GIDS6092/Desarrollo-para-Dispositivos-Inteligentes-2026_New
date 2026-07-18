@@ -39,6 +39,7 @@ class MqttAppService private constructor() {
 
     fun connect() {
         serviceScope.launch {
+            if (mqttClient?.isConnected == true) return@launch
             try {
                 val persistence = MemoryPersistence()
                 mqttClient = MqttClient(MqttConfig.BROKER_URL, MqttConfig.CLIENT_APP, persistence)
@@ -85,7 +86,7 @@ class MqttAppService private constructor() {
         try {
             val fcMsg = json.decodeFromString<FcMessage>(payload)
             serviceScope.launch {
-                SmartHealthRepository.actualizarFC(fcMsg.bpm)
+                SmartHealthRepository.actualizarFC(fcMsg.bpm, "Wearable")
             }
             republishToTv(fcMsg)
         } catch (e: Exception) {
@@ -94,35 +95,39 @@ class MqttAppService private constructor() {
     }
 
     private fun republishToTv(fcMsg: FcMessage) {
-        try {
-            val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-            val hora = sdf.format(Date(fcMsg.timestamp))
-            val tvMsg = TvMessage(bpm = fcMsg.bpm, estado = fcMsg.estado, hora = hora)
-            val payload = json.encodeToString(tvMsg)
-            val message = MqttMessage(payload.toByteArray()).apply {
-                qos = MqttConfig.QOS
-                isRetained = true
+        serviceScope.launch {
+            try {
+                val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+                val hora = sdf.format(Date(fcMsg.timestamp))
+                val tvMsg = TvMessage(bpm = fcMsg.bpm, estado = fcMsg.estado, hora = hora)
+                val payload = json.encodeToString(tvMsg)
+                val message = MqttMessage(payload.toByteArray()).apply {
+                    qos = MqttConfig.QOS
+                    isRetained = true
+                }
+                mqttClient?.publish(MqttConfig.TOPIC_TV, message)
+            } catch (e: Exception) {
+                Log.e(TAG, "❌ Error al republicar al TV: ${e.message}")
             }
-            mqttClient?.publish(MqttConfig.TOPIC_TV, message)
-        } catch (e: Exception) {
-            Log.e(TAG, "❌ Error al republicar al TV: ${e.message}")
         }
     }
 
     fun simularEnvioATv() {
         val fcMsg = FcMessage(bpm = (60..120).random(), estado = "Simulado")
         serviceScope.launch {
-            SmartHealthRepository.actualizarFC(fcMsg.bpm)
+            SmartHealthRepository.actualizarFC(fcMsg.bpm, "Mobile")
         }
         republishToTv(fcMsg)
     }
 
     fun disconnect() {
-        try {
-            mqttClient?.disconnect()
-            _isConnected.value = false
-        } catch (e: Exception) {
-            Log.e(TAG, "❌ Error al desconectar: ${e.message}")
+        serviceScope.launch {
+            try {
+                mqttClient?.disconnect()
+                _isConnected.value = false
+            } catch (e: Exception) {
+                Log.e(TAG, "❌ Error al desconectar: ${e.message}")
+            }
         }
     }
 }
