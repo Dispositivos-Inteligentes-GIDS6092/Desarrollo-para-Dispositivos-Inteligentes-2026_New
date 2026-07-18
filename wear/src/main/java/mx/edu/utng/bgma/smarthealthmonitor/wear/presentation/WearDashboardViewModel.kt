@@ -11,17 +11,19 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import mx.edu.utng.bgma.smarthealthmonitor.data.SmartHealthRepository
 import mx.edu.utng.bgma.smarthealthmonitor.data.db.LecturaFC
+import mx.edu.utng.bgma.smarthealthmonitor.wear.data.WearNeonRepository
 import mx.edu.utng.bgma.smarthealthmonitor.wear.mqtt.MqttWearPublisher
 
 class WearDashboardViewModel : ViewModel() {
 
     private val mqttPublisher = MqttWearPublisher()
+    private val neonRepository = WearNeonRepository()
     val isMqttConnected: StateFlow<Boolean> = mqttPublisher.isConnected
 
     init {
-// ...
         mqttPublisher.connect()
-        // Publicar cada vez que cambia la FC
+        
+        // Observar FC y publicar de forma segura
         SmartHealthRepository.fcFlow
             .onEach { bpm ->
                 if (bpm > 0) {
@@ -30,7 +32,14 @@ class WearDashboardViewModel : ViewModel() {
                         bpm > 100 -> "Alta"
                         else -> "Normal"
                     }
+                    
+                    // Publicar a MQTT (asíncrono internamente)
                     mqttPublisher.publishFC(bpm, estado)
+                    
+                    // Publicar a Neon (suspend function)
+                    viewModelScope.launch {
+                        neonRepository.publicarANeon(bpm)
+                    }
                 }
             }
             .launchIn(viewModelScope)
@@ -44,33 +53,17 @@ class WearDashboardViewModel : ViewModel() {
     fun manualMqttPublish() {
         val randomBpm = (60..120).random()
         viewModelScope.launch {
-            SmartHealthRepository.actualizarFC(randomBpm)
+            SmartHealthRepository.actualizarFC(randomBpm, "Wearable")
         }
     }
 
-    // Flujo de FC con valor por defecto
     val fc: StateFlow<Int> = SmartHealthRepository.fcFlow
         .map { if (it == 0) 72 else it }
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5_000),
-            72
-        )
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 72)
 
-    // Flujo de pasos
     val pasos: StateFlow<Int> = SmartHealthRepository.pasosFlow
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5_000),
-            0
-        )
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
-    // ← NUEVO: historial desde Room
-    val historial: StateFlow<List<LecturaFC>> =
-        SmartHealthRepository.obtenerHistorial()
-            .stateIn(
-                viewModelScope,
-                SharingStarted.WhileSubscribed(5_000),
-                emptyList()
-            )
+    val historial: StateFlow<List<LecturaFC>> = SmartHealthRepository.obtenerHistorial()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 }

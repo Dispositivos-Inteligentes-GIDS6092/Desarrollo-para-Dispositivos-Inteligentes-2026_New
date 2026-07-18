@@ -27,9 +27,9 @@ object SmartHealthRepository {
         dao = SmartHealthDB.getDatabase(context).lecturaDao()
     }
 
-    suspend fun actualizarFC(bpm: Int) {
+    suspend fun actualizarFC(bpm: Int, dispositivo: String = "Mobile") {
         _fcFlow.value = bpm
-        dao?.insertar(LecturaFC(valorBpm = bpm))
+        dao?.insertar(LecturaFC(valorBpm = bpm, dispositivo = dispositivo))
     }
 
     suspend fun actualizarPasos(pasos: Int) {
@@ -43,13 +43,18 @@ object SmartHealthRepository {
     fun obtenerHistorial(): Flow<List<LecturaFC>> =
         dao?.obtenerUltimas() ?: emptyFlow()
 
+    suspend fun obtenerNoSincronizados() = dao?.obtenerNoSincronizados() ?: emptyList()
+
+    suspend fun marcarSincronizado(id: Int) = dao?.marcarSincronizado(id)
+
+    suspend fun upsertLectura(lectura: LecturaFC) = dao?.upsert(lectura)
+
     suspend fun limpiarHistorialAntiguo(limite: Long = System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000L)) {
         dao?.limpiarViejos(limite)
     }
 
     suspend fun generarDatosDePrueba() {
         if ((dao?.contarRegistros() ?: 0) == 0) {
-            // Generar 10 lecturas aleatorias
             for (i in 1..10) {
                 val bpm = (60..140).random()
                 actualizarFC(bpm)
