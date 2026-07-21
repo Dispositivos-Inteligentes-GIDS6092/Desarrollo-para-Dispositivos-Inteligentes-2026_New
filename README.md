@@ -87,12 +87,10 @@ graph TD
 # PANTALLAS 
 ![img_5.png](img_5.png)
 ![img_6.png](img_6.png)
-![Captura de pantalla 2026-07-08 104757.png](../../../../Pictures/Screenshots/Captura%20de%20pantalla%202026-07-08%20104757.png)
-![Captura de pantalla 2026-07-08 105003.png](../../../../Pictures/Screenshots/Captura%20de%20pantalla%202026-07-08%20105003.png)
-![Captura de pantalla 2026-07-08 111546.png](../../../../Pictures/Screenshots/Captura%20de%20pantalla%202026-07-08%20111546.png)
-![Captura de pantalla 2026-07-17 191541.png](../../../../Pictures/Screenshots/Captura%20de%20pantalla%202026-07-17%20191541.png)
-![Captura de pantalla 2026-07-17 134828.png](../../../../Pictures/Screenshots/Captura%20de%20pantalla%202026-07-17%20134828.png)
-![Captura de pantalla 2026-07-17 134901.png](../../../../Pictures/Screenshots/Captura%20de%20pantalla%202026-07-17%20134901.png)
+![img_7.png](img_7.png)
+![img_8.png](img_8.png) 
+![img_9.png](img_9.png)
+![img_10.png](img_10.png)
 
 ### Tecnologías principales:
 - **App**: Jetpack Compose, Material3, Room, Cast SDK
